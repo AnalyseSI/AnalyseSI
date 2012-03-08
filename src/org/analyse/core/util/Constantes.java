@@ -210,7 +210,7 @@ public class Constantes {
     public static final String MESSAGE_CONNEXION_AVEC_BASE="connexion_avec_base";
     public static final String MESSAGE_ENTITE="entite" ;
     public static final String MESSAGE_NOM="nom" ;
-    public static final String MESSAGE_ID="ID" ;
+    public static final String MESSAGE_ID="id" ;
     public static final String MESSAGE_TAILLE="taille" ;
     public static final String MESSAGE_TYPE="type" ;
     public static final String MESSAGE_SUPPRIMER="supprimer" ;
