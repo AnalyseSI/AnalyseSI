@@ -1,0 +1,13 @@
+Auteur : Bruno Dabo
+
+Le projet est hébergé sur https://launchpad.net/analysesi
+N'hésitez pas à participer au groupe AnalyseSI ( https://launchpad.net/~analysesi ) 
+Une mailing-list est ouverte sur analysesi@lists.launchpad.net
+
+----------------------
+Corrections apportées
+RELEASE : 0.75 ( Rockhampton )
+Date : janvier 2011
+----------------------
+#505822	Utiliser l'outil curseur par défaut dans la vue MCD
+#517141	Ajouter le modèle MLDR
