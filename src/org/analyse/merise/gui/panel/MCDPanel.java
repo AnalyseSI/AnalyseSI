@@ -41,9 +41,13 @@ import java.io.File;
 import java.io.IOException;
 
 import org.analyse.core.util.Constantes ;
+
 import javax.imageio.stream.FileImageOutputStream;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -158,7 +162,25 @@ public class MCDPanel extends AnalysePanel
         this.add(BorderLayout.NORTH, toolbar);
 
         mcdComponent.addMouseListener(new MouseHandler());
+        
+		// Utilisation de la touche SUPPR ou BACK_SPACE pour supprimer la sélection
+		mcdComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "suppr");
+		mcdComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "suppr");
+		mcdComponent.getActionMap().put("suppr",  deleteObjectsAction);
     }
+    
+    private Action deleteObjectsAction = new AbstractAction() {
+
+		private static final long serialVersionUID = 4024872425170460547L;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (mcdComponent.sizeSelection() > 0)
+				deleteObjects();
+		}
+	};
 
     private void initToolbar()
     {
@@ -397,6 +419,22 @@ public class MCDPanel extends AnalysePanel
     	sauf.setSelected(true);
     	
     }
+    
+	private void deleteObjects() {
+		DictionnaireTable data = mcdComponent.getData();
+		String mess = Utilities
+				.getLangueMessage("supprimer_objet_selection");
+		if (mcdComponent.sizeSelection() > 1)
+			mess = "Voulez-vous vraiment supprimer les "
+					+ mcdComponent.sizeSelection()
+					+ " objets sélectionnés ?";
+		if (JOptionPane.showConfirmDialog(null, mess,
+				Utilities.getLangueMessage("analysesi"),
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		for (MCDObjet mcdObjet : mcdComponent.removeObjets())
+			data.deleteObserver(mcdObjet);
+		}
+	}
 
     private class ActionHandler implements ActionListener
     {
@@ -438,15 +476,7 @@ public class MCDPanel extends AnalysePanel
             } 
             
             if (action.equals(Constantes.DEL_OBJET)) {
-                DictionnaireTable data = mcdComponent.getData();
-                String mess =  Utilities.getLangueMessage ("supprimer_objet_selection") ;
-                if (mcdComponent.sizeSelection() > 1)
-                    mess = "Voulez-vous vraiment supprimer les " + mcdComponent.sizeSelection() + " objets sélectionnés ?";
-                if (JOptionPane.showConfirmDialog(null, mess, Utilities.getLangueMessage ("analysesi"),
-                        JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
-                    return;
-                for (MCDObjet mcdObjet : mcdComponent.removeObjets())
-                    data.deleteObserver(mcdObjet);
+            	deleteObjects();
             } 
             if (action.equals(Constantes.MOD_OBJET)) {
                 entiteDialog.load((MCDObjet) objet);
