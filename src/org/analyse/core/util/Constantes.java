@@ -258,7 +258,8 @@ public class Constantes {
     public static final String MESSAGE_IMPOSSIBLE_SAVE_FICHIER = "impossible_save_fichier" ;
     public static final String MESSAGE_OPTIONS_SQL = "options_sql" ;
     public static final String MESSAGE_OPTIONS_PROJET_ASI="options_projet_asi" ;
-    
-    public static final String INT_AUTO_INCREMENT = "int AUTO_INCREMENT" ;  // Bug #567501
+
+    public static final String INT_AUTO_INCREMENT = "INT" ;
+    public static final String BIGINT_AUTO_INCREMENT = "BIGINT" ;
     
 }

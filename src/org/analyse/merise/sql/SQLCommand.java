@@ -113,7 +113,8 @@ public class SQLCommand {
 	    types.add("SMALLINT") ;
 	    types.add("MEDIUMINT") ;
 	    types.add("INT") ;
-            types.add("AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
+        types.add("INT_AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
+        types.add("BIGINT_AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
 	    types.add("INTEGER") ;
 	    types.add("BIGINT") ;
 	    types.add("TIMESTAMP") ;

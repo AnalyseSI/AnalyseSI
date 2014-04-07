@@ -243,10 +243,15 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean contains(String code)
     {
+
+        return false;
+        /* Pouvoir utilisé le même nom d'attribut => entorse à Merise mais beaucoup utilisé dans la pratique
+
         for (int i = 0; i < rows.size(); i++)
             if (code.equals((String) (rows.get(i)[1])))
                 return true;
         return false;
+        */
     }
 
     /**
