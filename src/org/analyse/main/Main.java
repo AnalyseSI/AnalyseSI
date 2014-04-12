@@ -49,7 +49,7 @@ public class Main
             + File.separator + ".analyseSI" + File.separator;
 
     /** Fichier des propriétés */
-    public static final String USER_PROPS = SETTINGS_DIRECTORY + ".props";
+    public static final String USER_PROPS = SETTINGS_DIRECTORY + "analyseSI.properties";
 
     /** Numero du port du serveur Analyse. * */
     public static AnalyseFrame analyseFrame;

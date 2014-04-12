@@ -39,10 +39,10 @@ public class Constantes {
     public static final String ASI_ENCODING = "UTF-8" ;   
     
     public static final String FILE_PNG_ANALYSESI= "analysesi.png" ;
-    public static final String FILE_PNG_NEW = "new.png" ;
-    public static final String FILE_PNG_OPEN = "open.png" ;
-    public static final String FILE_PNG_SAVE ="save.png" ;    
-    public static final String FILE_PNG_SAVEAS = "saveas.png" ;
+    public static final String FILE_PNG_NEW = "filenew.png" ;
+    public static final String FILE_PNG_OPEN = "fileopen.png" ;
+    public static final String FILE_PNG_SAVE ="filesave.png" ;
+    public static final String FILE_PNG_SAVEAS = "filesaveas.png" ;
     public static final String FILE_PNG_UNDO = "undo.png" ;    
     public static final String FILE_PNG_MLD = "mld.png" ;
     public static final String FILE_PNG_REDO = "redo.png" ;
@@ -51,29 +51,30 @@ public class Constantes {
     public static final String FILE_PNG_TABLE = "table.png" ;
     public static final String FILE_PNG_PASTE = "paste.png" ;
     public static final String FILE_PNG_COPY ="copy.png" ;    
-    public static final String FILE_PNG_TREE = "tree.png" ;
+    public static final String FILE_PNG_TREE = "folder_home.png" ;
     public static final String FILE_PNG_ABOUT = "about.png" ;
     public static final String FILE_PNG_LOGO = "logo.png" ;
-    public static final String FILE_PNG_RIGHT = "right.png" ; 
-    public static final String FILE_PNG_LEFT = "left.png" ;
-    public static final String FILE_PNG_UP= "up.png" ;
+    public static final String FILE_PNG_RIGHT = "1rightarrow.png" ;
+    public static final String FILE_PNG_LEFT = "1leftarrow.png" ;
+    public static final String FILE_PNG_UP= "1uparrow.png" ;
     public static final String FILE_PNG_SQL= "sql.png" ;
     public static final String FILE_PNG_MCD= "mcd.png" ;
     public static final String FILE_PNG_MPD= "mpd.png" ;
-    public static final String FILE_PNG_DOWN= "down.png" ;
-    public static final String FILE_PNG_DELETE = "delete.png" ;
+    public static final String FILE_PNG_DOWN= "1downarrow.png" ;
+    public static final String FILE_PNG_DELETE = "stop.png" ;
     public static final String FILE_PNG_ENTITE = "entite.png" ;
-    public static final String FILE_PNG_HOME = "home.png" ;
+    public static final String FILE_PNG_HOME = "folder_home.png" ;
     public static final String FILE_PNG_PARAMETRAGE = "parametrage.png" ;
     public static final String FILE_PNG_EDIT = "edit.png" ;
     public static final String FILE_PNG_BUILD = "build.png" ;
-    public static final String FILE_PNG_BUILD_MPD = "buildmpd.png" ;
-    public static final String FILE_PNG_DECONNEXION= "deconnexion.png" ;    
+    public static final String FILE_PNG_BUILD_MPD = "exec.png" ;
+    public static final String FILE_PNG_DECONNEXION= "exit.png" ;
+    public static final String FILE_PNG_CONNEXION= "connect_creating.png" ;
     public static final String FILE_PNG_OK = "ok.png" ;
     public static final String FILE_PNG_ASSOCIATION = "association.png" ;
     public static final String FILE_PNG_LIEN = "lien.png" ;
 	public static final String FILE_PNG_CURSEUR = "curseur.png" ;
-	
+	//connect_creating
     public static final String STR_NAME= "NAME";
     
 	public final static int SHOW_ALL = 0;
@@ -258,7 +259,7 @@ public class Constantes {
     public static final String MESSAGE_IMPOSSIBLE_SAVE_FICHIER = "impossible_save_fichier" ;
     public static final String MESSAGE_OPTIONS_SQL = "options_sql" ;
     public static final String MESSAGE_OPTIONS_PROJET_ASI="options_projet_asi" ;
-
+    public static final String MESSAGE_SAUVEGARDER_FICHIER_PNG="help_sauvegarde_png" ;
     public static final String INT_AUTO_INCREMENT = "INT" ;
     public static final String BIGINT_AUTO_INCREMENT = "BIGINT" ;
     

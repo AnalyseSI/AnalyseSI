@@ -170,8 +170,8 @@ public class SQLPanel extends AnalysePanel implements Observer,
 
 	private void initAction() {
 		
-		connexion = new BasicAction("connexion", Utilities.getLangueMessage("connexion_avec_sgbd"), 
-				"CONN", GUIUtilities.getImageIcon("connexion.png"), 0, null);
+		connexion = new BasicAction(null, Utilities.getLangueMessage("connexion_avec_sgbd"),
+				"CONN", GUIUtilities.getImageIcon(Constantes.FILE_PNG_CONNEXION), 0, null);
 		connexion.addActionListener(actionHandler);
 
 		deconnexion = new BasicAction("Déconnexion", "Déconnexion",
@@ -179,11 +179,11 @@ public class SQLPanel extends AnalysePanel implements Observer,
 				null);
 		deconnexion.addActionListener(actionHandler);
 
-		exec = new BasicAction("Exécuter", Utilities.getLangueMessage(Constantes.MESSAGE_EXECUTER_REQUETE_SQL), "EXEC",
+		exec = new BasicAction(null, Utilities.getLangueMessage(Constantes.MESSAGE_EXECUTER_REQUETE_SQL), "EXEC",
 				GUIUtilities.getImageIcon("build.png"), 0, null);
 		exec.addActionListener(actionHandler);
 
-		save = new BasicAction(Utilities.getLangueMessage("sauvegarder_sql"),
+		save = new BasicAction(null,
 				Utilities.getLangueMessage("sauvegarder_script_sql"), "SAVESQL",
 				GUIUtilities.getImageIcon(Constantes.FILE_PNG_SAVE), 0, null);
 		save.addActionListener(actionHandler);
