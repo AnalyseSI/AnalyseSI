@@ -194,16 +194,16 @@ public class MCDComponent extends ZGraphique implements Observer {
 	}
 
 	/**
-	 * Indique si il est possible de créer un lien entre les deux éléments. <br>
-	 * Retourne vrai si les deux éléments représente une association et une
+	 * Indique s'il est possible de créer un lien entre les deux éléments. <br>
+	 * Retourne vrai si les deux éléments représentent une association et une
 	 * entité, faux dans le cas contraire.
 	 */
-	public boolean peutCreerLien(ZElement elem1, ZElement elem2) {
-		return super.peutCreerLien(elem1, elem2)
-				&& (elem1 instanceof MCDAssociation
-						&& elem2 instanceof MCDEntite || elem2 instanceof MCDAssociation
-						&& elem1 instanceof MCDEntite);
-	}
+    public boolean peutCreerLien(ZElement elem1, ZElement elem2) {
+        return super.peutCreerLien(elem1, elem2)
+                && (elem1 instanceof MCDAssociation
+                && elem2 instanceof MCDEntite || elem2 instanceof MCDAssociation
+                && elem1 instanceof MCDEntite);
+    }
 
 	/**
 	 * Retourne la table du dictionnaire des informations correspondant au MCD.
@@ -568,7 +568,13 @@ public class MCDComponent extends ZGraphique implements Observer {
 									
 							} else {
 
-                                ent.addForeignKey(mcdEntiteAssociee.getCodeInformation(0), Utilities.normaliseString( mcdEntiteAssociee.getName(), Constantes.LOWER) ) ;  // Bug #520410
+                                /*
+                                 * Traiter le cas des nom d'attributs utilisés plusieurs fois
+                                 */
+                                String nomTable = Utilities.normaliseString( mcdEntiteAssociee.getName(), Constantes.LOWER) ;
+                                String ws_foreignkey = ( nomTable+"_"+ mcdEntiteAssociee.getCodeInformation(0) ).toLowerCase() ;
+
+                                ent.addForeignKey(ws_foreignkey, nomTable) ;  // Bug #520410
                                 if ( ws_typeAssociation.equals( Constantes.ZERO_UN ) )
                                 	ent.setForeignKeyCanBeNull ( true ) ;
                                 else 
@@ -578,7 +584,7 @@ public class MCDComponent extends ZGraphique implements Observer {
 										ent.setForeignKeyCanBeNull ( false ) ;
 
 								
-								ent.addInformation( mcdEntiteAssociee.getCodeInformation(0)) ;
+								ent.addInformation(ws_foreignkey) ;
 								
 								if (ws_typeAssociation.equals( Constantes.ZERO_N ) )
 									return true ;
