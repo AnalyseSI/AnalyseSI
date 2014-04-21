@@ -88,7 +88,7 @@ public class MCDComponent extends ZGraphique implements Observer {
 	 * Utilisé lors de la création d'une nouvelle entité
 	 */
 	public MCDEntite addEntite(int x, int y) {
-		MCDEntite ent = null ;
+		MCDEntite ent ;
 
 		//bug : 347422 
 		ent = new MCDEntite(this, x, y) ; 
