@@ -262,5 +262,5 @@ public class Constantes {
     public static final String MESSAGE_SAUVEGARDER_FICHIER_PNG="help_sauvegarde_png" ;
     public static final String INT_AUTO_INCREMENT = "INT" ;
     public static final String BIGINT_AUTO_INCREMENT = "BIGINT" ;
-    
+    public static final String AUTO_INCREMENT = "INT" ;
 }
