@@ -27,15 +27,16 @@
 
 package org.analyse.merise.gui.table;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.analyse.core.gui.zgraph.ZElement;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
+import org.analyse.main.Main;
+import org.analyse.merise.main.MeriseModule;
+import org.analyse.merise.mcd.composant.MCDObjet;
 
 /**
  * Cette table contient les informations utilisables par le MCD.
@@ -56,13 +57,16 @@ public class DictionnaireTable extends AbstractTableModel
 
     public static final int USE = 4;
 
-    /** Nom des 5 colonnes. */
+    public static final int ENTITY = 5;
+
+    /** Nom des 6 colonnes. */
     private final String[] columnNames = { 
     		Utilities.getLangueMessage (Constantes.MESSAGE_NOM), 
     		Utilities.getLangueMessage (Constantes.MESSAGE_ID),
     		Utilities.getLangueMessage (Constantes.MESSAGE_TYPE), 
     		Utilities.getLangueMessage (Constantes.MESSAGE_TAILLE),
-    		Utilities.getLangueMessage (Constantes.MESSAGE_UTILISE)
+    		Utilities.getLangueMessage (Constantes.MESSAGE_UTILISE),
+            Utilities.getLangueMessage (Constantes.MESSAGE_ENTITE)  // Bug #712439
     		};
 
     /** Données contenu dans la table. */
@@ -133,13 +137,14 @@ public class DictionnaireTable extends AbstractTableModel
 
             this.data = dataSv;
         }*/
-    	Object[] tab = new Object[5];
+    	Object[] tab = new Object[6];
     	
     	tab[0] = "";
     	tab[1] = "";
     	tab[2] = types.get(0);
     	tab[3] = new Integer(0);
     	tab[4] = new Boolean(false);
+        tab[5] = "";
     	
     	rows.add(tab);
         fireTableDataChanged();
@@ -151,7 +156,7 @@ public class DictionnaireTable extends AbstractTableModel
     public void addData(String code, String nom, String type, String taille,
             String utilise)
     {
-    	Object[] tab = new Object[5];
+    	Object[] tab = new Object[6];
     	tab[0] = nom;
     	tab[1] = code;
     	tab[2] = type;
@@ -163,7 +168,8 @@ public class DictionnaireTable extends AbstractTableModel
                 tab[3] = new Integer (0) ;
             }
         
-    	tab[4] = new Boolean(utilise);   
+    	tab[4] = new Boolean(utilise);
+        tab[5] = "";
     	rows.set(rows.size()-1, tab);
     	addNewLine();
     }
@@ -179,12 +185,13 @@ public class DictionnaireTable extends AbstractTableModel
         }
 
         if (!contains(Utilities.normaliseString(nom, Constantes.LOWER))) {
-        	Object[] tab = new Object[5];
+        	Object[] tab = new Object[6];
         	tab[0] = nom;
         	tab[1] = Utilities.normaliseString(nom,Constantes.LOWER);
         	tab[2] = type;
         	tab[3] = tailleInt;
         	tab[4] = new Boolean(false);
+            tab[5] = "";
         	rows.set(rows.size()-1, tab);
             addNewLine();
         }
@@ -280,7 +287,11 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public Object getValueAt(int row, int col)
     {
-        return rows.get(row)[col];
+        if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
+            return getEntityNameOfProperty(row);
+        } else {
+            return rows.get(row)[col];
+        }
     }
 
     /**
@@ -428,10 +439,9 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean isCellEditable(int row, int col)
     {
-        if (col == ID || col == USE)
+        if (col == ID || col == USE || col == ENTITY)
             return false;
         return true;
-
     }
 
     /**
@@ -488,5 +498,31 @@ public class DictionnaireTable extends AbstractTableModel
         observable.deleteObservers();
 
         fireTableDataChanged();
+    }
+
+    /**
+     * Retourne le nom de l'entité dans laquelle la propriété (de la row) est utilisée.
+     * (Bug #712439)
+     *
+     * @param row
+     *             ligne de la case (propriété du dictionnaire)
+     *
+     * @return Le nom de l'entité dans laquelle la propriété (de la row) est utilisée.
+     */
+    private String getEntityNameOfProperty(int row)
+    {
+        MeriseModule meriseModule = (MeriseModule)Main.getModule("MERISE");
+
+        for(Iterator<ZElement> e = meriseModule.getMCDComponent().enumElements(); e.hasNext();) {
+            MCDObjet o = (MCDObjet)e.next();
+            for (int i = 0; i < o.sizeInformation(); i++) {
+
+                if (rows.get(row)[ID] != null && o.getCodeInformation(i).equals(rows.get(row)[ID])) {
+                    return o.getName();
+                }
+            }
+        }
+
+        return "";
     }
 }
