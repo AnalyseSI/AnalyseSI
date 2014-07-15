@@ -298,6 +298,7 @@ public class SQLCommand {
 					+ driver
 					+ ", vérifiez que le driver JDBC se trouve bien dans le classpath";
 			//e.printStackTrace();
+            error += e.getMessage() ;
 			return false;
 		}
 
@@ -306,6 +307,7 @@ public class SQLCommand {
 			stmt = con.createStatement();
 		} catch (SQLException e) {
 			error = "Impossible de se connecter à la base de donnée, vérifier l'URL, le login et le password\net que votre database existe !";
+            error += e.getMessage() ;
 			//e.printStackTrace();
 			return false;
 		}
