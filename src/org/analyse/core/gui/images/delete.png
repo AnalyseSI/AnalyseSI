@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="Loggerhead/1.18.2 Python/2.7.3 Bazaar/2.6.0 Paste/1.7.5.1 PasteDeploy/1.3.4 SimpleTAL/4.3 Pygments/1.6 simplejson/3.1.3" name="generator" />
+<title>~bruno.dabo/analysesi/stable : contents of src/org/analyse/core/gui/images/delete.png at revision 62</title>
+<link href="/static/css/global.css" rel="stylesheet" />
+<link href="/static/images/favicon.png" rel="shortcut icon" />
+
+<script type="text/javascript">
+var global_path = '/~bruno.dabo/analysesi/stable/';
+var collapsed_icon_path = '/static/images/treeCollapsed.png';
+var expanded_icon_path = '/static/images/treeExpanded.png';
+</script>
+<script src="/static/javascript/yui/build/yui/yui-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/oop/oop-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/event/event-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/attribute/attribute-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/base/base-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/dom/dom-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/node/node-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/anim/anim-min.js" type="text/javascript"></script>
+<script src="/static/javascript/yui/build/io/io-base-min.js" type="text/javascript"></script>
+<script src="/static/javascript/custom.js" type="text/javascript"></script>
+
+<link href="/static/css/view.css" media="all" type="text/css" rel="stylesheet" />
+<link href="/static/css/highlight.css" media="all" type="text/css" rel="stylesheet" />
+
+</head>
+<body class="public">
+
+
+
+<div class="black-link">
+<a href="https://code.launchpad.net/~bruno.dabo/analysesi/stable">
+← Back to branch summary
+</a>
+</div>
+
+
+<h1 class="branch-name">
+~bruno.dabo/analysesi/stable
+</h1>
+
+<ul id="menuTabs">
+
+
+<li><a href="/~bruno.dabo/analysesi/stable/changes" title="Changes">Changes</a></li>
+<li><a href="/~bruno.dabo/analysesi/stable/files" title="Files" id="on">Files</a></li>
+
+</ul>
+
+<div id="loggerheadCont">
+<div id="search_terms"></div>
+
+<div id="breadcrumbs">
+
+<a href="https://code.launchpad.net/~bruno.dabo/analysesi/stable">~bruno.dabo/analysesi/stable</a>
+
+
+<span>: <span class="breadcrumb">
+/<a href="/~bruno.dabo/analysesi/stable/files/62/src">src</a>/<a href="/~bruno.dabo/analysesi/stable/files/62/src/org">org</a>/<a href="/~bruno.dabo/analysesi/stable/files/62/src/org/analyse">analyse</a>/<a href="/~bruno.dabo/analysesi/stable/files/62/src/org/analyse/core">core</a>/<a href="/~bruno.dabo/analysesi/stable/files/62/src/org/analyse/core/gui">gui</a>/<a href="/~bruno.dabo/analysesi/stable/files/62/src/org/analyse/core/gui/images">images</a>/delete.png
+</span> (revision 62)</span>
+</div>
+
+<div>
+
+<ul id="submenuTabs">
+<li id="first">
+<a href="/~bruno.dabo/analysesi/stable/files/62">browse files</a>
+</li>
+<li>
+<a href="/~bruno.dabo/analysesi/stable/annotate/head:/src/org/analyse/core/gui/images/delete.png">view with revision information</a>
+</li>
+
+<li>
+<a href="/~bruno.dabo/analysesi/stable/revision/62">view revision</a>
+</li>
+<li>
+<a href="/~bruno.dabo/analysesi/stable/changes?filter_file_id=delete.png-20101229212154-yszo6rp2l5185tan-35">view changes to this file</a>
+</li>
+<li id="last">
+<a href="/~bruno.dabo/analysesi/stable/download/head:/delete.png-20101229212154-yszo6rp2l5185tan-35/delete.png">download file</a>
+</li>
+</ul>
+<div class="view">
+<table id="logentries">
+
+<tr>
+<td class="viewLine">
+<pre><a id="L1" href="#L1">1</a>
+</pre>
+</td>
+<td class="viewCont">
+<pre>(This is a binary file.)</pre>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<p id="footer" class="fl">
+Loggerhead is a web-based interface for <a href="http://bazaar-vcs.org/">Bazaar</a> branches
+<br />
+Version: 1.18.2<span>, Revision: 17111</span>
+</p>
+</div>
+</body>
+</html>
