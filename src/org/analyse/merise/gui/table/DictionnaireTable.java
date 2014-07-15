@@ -525,5 +525,4 @@ public class DictionnaireTable extends AbstractTableModel
 
         return "";
     }
-
 }
