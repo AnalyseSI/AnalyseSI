@@ -68,7 +68,7 @@ public class MPDComponent extends ZGraphique {
 
     /**
      * @return un MPDEntite
-     * @param nom
+     * @param name
      *            Nom de l'entité à retourner
      */
     public MPDEntite getMPDEntite(String name) {
@@ -122,12 +122,7 @@ public class MPDComponent extends ZGraphique {
         int cmp, nbId;
 
         sql.clear();
-        
-        text = "# script créé le : " + new java.util.Date() + " -   syntaxe MySQL ;";
-        sql.addRequest(text);        
-        text = "# use  VOTRE_BASE_DE_DONNEE ;" ;        
-        sql.addRequest(text);
-        
+
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
             ent = (MPDEntite) (e.next());
             text = "DROP TABLE IF EXISTS " + Utilities.normaliseString(ent.getName(), Constantes.LOWER) + " ;";            
@@ -174,14 +169,19 @@ public class MPDComponent extends ZGraphique {
                 	 * traiter le cas des relations ternaires   
                 	 */
                 	
-                    if ("AUTO_INCREMENT".equals(type)) {
-                        type = Constantes.INT_AUTO_INCREMENT;  // Bug #567501
+                    if ("INT_AUTO_INCREMENT".equals(type)) {
+                        type = Constantes.INT_AUTO_INCREMENT ;  // Bug #567501
+                    }
+                    if ("BIGINT_AUTO_INCREMENT".equals(type)) {
+                        type = Constantes.BIGINT_AUTO_INCREMENT;  // Bug #567501
                     }
                 } else {
-                    if ("AUTO_INCREMENT".equals(type)) {
+                    if ("BIGINT_AUTO_INCREMENT".equals(type)) {
+                        type = "BIGINT";
+                    }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
+                    if ("INT_AUTO_INCREMENT".equals(type)) {
                         type = "INT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
-
                 }
                 
                 info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
@@ -198,6 +198,10 @@ public class MPDComponent extends ZGraphique {
                         text += "(" + defautSize + ")";
                     }
                 }
+
+                if (premier_auto_increment)
+                     text += "  AUTO_INCREMENT" ;
+
 
                 if (cmp < nbId) {
                     text += " NOT NULL";

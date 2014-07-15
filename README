@@ -4,10 +4,10 @@ Le projet est hébergé sur https://launchpad.net/analysesi
 N'hésitez pas à participer au groupe AnalyseSI ( https://launchpad.net/~analysesi ) 
 Une mailing-list est ouverte sur analysesi@lists.launchpad.net
 
+Les sources sont sur Github
+https://github.com/AnalyseSI/AnalyseSI
+
 ----------------------
-Corrections apportées
-RELEASE : 0.75 ( Rockhampton )
-Date : janvier 2011
+RELEASE : 0.76 ( Bundaberg )
+Date : Juillet 2014
 ----------------------
-#505822	Utiliser l'outil curseur par défaut dans la vue MCD
-#517141	Ajouter le modèle MLDR
