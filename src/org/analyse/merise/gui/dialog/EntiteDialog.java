@@ -546,11 +546,14 @@ public class EntiteDialog extends JDialog
             	*/
             	 if ( ! nomInfo.getText().equals("") )
                       
-                 	if ( data.contains ( nomInfo.getText() ) ) {  
+                 	/*  Pouvoir utilisé le même nom d'attribut => entorse à Merise mais beaucoup utilisé dans la pratique
+
+                 	if ( data.contains ( nomInfo.getText() ) ) {
                     	Object[] messageArguments = { nomInfo.getText() } ;                     	                  		
                  		GUIUtilities.error (Utilities.getLangueMessageFormatter (Constantes.MESSAGE_PROPRIETE_EXISTE, messageArguments ) );
          	    		return ;
                  	}
+                 	*/
                 
             	 data.addData(nomInfo.getText(), (String) typesInfo
                         .getSelectedItem(), tailleInfo.getText());

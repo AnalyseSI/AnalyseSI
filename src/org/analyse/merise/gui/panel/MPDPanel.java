@@ -89,9 +89,9 @@ public class MPDPanel extends AnalysePanel
         AnalyseFilter af;
         FileChooserFilter cf;
         chooser.resetChoosableFileFilters();
-        cf = new FileChooserFilter("PNG");
-        cf.setExtension("png");
-        cf.setDescription("Image PNG");
+        cf = new FileChooserFilter(Constantes.PNG);
+        cf.setExtension(Constantes.PNG_MINUSCULE);
+        cf.setDescription(Constantes.STR_IMAGE_PNG);
         chooser.addChoosableFileFilter(cf);
         chooser.setDialogType(JFileChooser.SAVE_DIALOG);
 
@@ -126,8 +126,8 @@ public class MPDPanel extends AnalysePanel
 
     private void initAction()
     {
-        saveGraphic = new BasicAction("Sauvegarder le graphique",
-                "Sauvegarder le graphique dans un fichier PNG", "SAVE_GRAPH",
+        saveGraphic = new BasicAction(null,
+                Utilities.getLangueMessage(Constantes.MESSAGE_SAUVEGARDER_FICHIER_PNG), "SAVE_GRAPH",
                 GUIUtilities.getImageIcon(Constantes.FILE_PNG_SAVE), 0, null);
         saveGraphic.addActionListener(actionHandler);
     }
