@@ -27,15 +27,16 @@
 
 package org.analyse.merise.gui.table;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.analyse.core.gui.zgraph.ZElement;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
+import org.analyse.main.Main;
+import org.analyse.merise.main.MeriseModule;
+import org.analyse.merise.mcd.composant.MCDObjet;
 
 /**
  * Cette table contient les informations utilisables par le MCD.
@@ -56,14 +57,17 @@ public class DictionnaireTable extends AbstractTableModel
 
     public static final int USE = 4;
 
-    /** Nom des 5 colonnes. */
-    private final String[] columnNames = { 
-    		Utilities.getLangueMessage (Constantes.MESSAGE_NOM), 
-    		Utilities.getLangueMessage (Constantes.MESSAGE_ID),
-    		Utilities.getLangueMessage (Constantes.MESSAGE_TYPE), 
-    		Utilities.getLangueMessage (Constantes.MESSAGE_TAILLE),
-    		Utilities.getLangueMessage (Constantes.MESSAGE_UTILISE)
-    		};
+    public static final int ENTITY = 5;
+
+    /** Nom des 6 colonnes. */
+    private final String[] columnNames = {
+            Utilities.getLangueMessage (Constantes.MESSAGE_NOM),
+            Utilities.getLangueMessage (Constantes.MESSAGE_ID),
+            Utilities.getLangueMessage (Constantes.MESSAGE_TYPE),
+            Utilities.getLangueMessage (Constantes.MESSAGE_TAILLE),
+            Utilities.getLangueMessage (Constantes.MESSAGE_UTILISE),
+            Utilities.getLangueMessage (Constantes.MESSAGE_ENTITE)  // Bug #712439
+    };
 
     /** Données contenu dans la table. */
     private ArrayList<Object[]> rows = new ArrayList<Object[]>();
@@ -75,7 +79,7 @@ public class DictionnaireTable extends AbstractTableModel
 
     /**
      * Créer une nouvelle <code>DictionnaireTable</code>.
-     *  
+     *
      */
     public DictionnaireTable(List<String> list)
     {
@@ -133,15 +137,16 @@ public class DictionnaireTable extends AbstractTableModel
 
             this.data = dataSv;
         }*/
-    	Object[] tab = new Object[5];
-    	
-    	tab[0] = "";
-    	tab[1] = "";
-    	tab[2] = types.get(0);
-    	tab[3] = new Integer(0);
-    	tab[4] = new Boolean(false);
-    	
-    	rows.add(tab);
+        Object[] tab = new Object[6];
+
+        tab[0] = "";
+        tab[1] = "";
+        tab[2] = types.get(0);
+        tab[3] = new Integer(0);
+        tab[4] = new Boolean(false);
+        tab[5] = "";
+
+        rows.add(tab);
         fireTableDataChanged();
     }
 
@@ -149,23 +154,24 @@ public class DictionnaireTable extends AbstractTableModel
      * Ajoute une nouvelle donnée dans le tableau
      */
     public void addData(String code, String nom, String type, String taille,
-            String utilise)
+                        String utilise)
     {
-    	Object[] tab = new Object[5];
-    	tab[0] = nom;
-    	tab[1] = code;
-    	tab[2] = type;
+        Object[] tab = new Object[6];
+        tab[0] = nom;
+        tab[1] = code;
+        tab[2] = type;
 
-       //Bug #612891
+        //Bug #612891
         try {
             tab[3] = new Integer (taille) ;
-            } catch (Exception e) {
-                tab[3] = new Integer (0) ;
-            }
-        
-    	tab[4] = new Boolean(utilise);   
-    	rows.set(rows.size()-1, tab);
-    	addNewLine();
+        } catch (Exception e) {
+            tab[3] = new Integer (0) ;
+        }
+
+        tab[4] = new Boolean(utilise);
+        tab[5] = "";
+        rows.set(rows.size()-1, tab);
+        addNewLine();
     }
 
     public void addData(String nom, String type, String taille)
@@ -179,13 +185,14 @@ public class DictionnaireTable extends AbstractTableModel
         }
 
         if (!contains(Utilities.normaliseString(nom, Constantes.LOWER))) {
-        	Object[] tab = new Object[5];
-        	tab[0] = nom;
-        	tab[1] = Utilities.normaliseString(nom,Constantes.LOWER);
-        	tab[2] = type;
-        	tab[3] = tailleInt;
-        	tab[4] = new Boolean(false);
-        	rows.set(rows.size()-1, tab);
+            Object[] tab = new Object[6];
+            tab[0] = nom;
+            tab[1] = Utilities.normaliseString(nom,Constantes.LOWER);
+            tab[2] = type;
+            tab[3] = tailleInt;
+            tab[4] = new Boolean(false);
+            tab[5] = "";
+            rows.set(rows.size()-1, tab);
             addNewLine();
         }
     }
@@ -195,49 +202,49 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public void delLines(int[] indexRows)
     {
-    // modif bellier.l  -   merci pour le code  
-    	//la fonction remove d'une arraylist effectue également un rétractage
-    	//indiceRow contient des indices "erronés" d'où l'intéret de delay
-    	for (int i = indexRows.length - 1; i >=0 ; i--) {
-        	observable.notifyObservers(new ArgObserverTable(
-        			ArgObserverTable.DELETE, (String) rows.get(indexRows[i])[1]));
+        // modif bellier.l  -   merci pour le code
+        //la fonction remove d'une arraylist effectue également un rétractage
+        //indiceRow contient des indices "erronés" d'où l'intéret de delay
+        for (int i = indexRows.length - 1; i >=0 ; i--) {
+            observable.notifyObservers(new ArgObserverTable(
+                    ArgObserverTable.DELETE, (String) rows.get(indexRows[i])[1]));
             rows.remove(indexRows[i]);
-    	}
+        }
 
         //Actualise le tableau
         fireTableDataChanged();
     }
-    
+
     /**
      * Déplace une série de ligne dans la direction demandée.
-     * 
+     *
      * @param indexRows
      *            liste des index des lignes
      * @param direction
      *            direction bas ou haut
      */
     public void moveLines(int indexRows[], int direction){
-    	
-    	if(indexRows.length <= 0) return;
-    	int firstIndex = indexRows[0];
-    	int lastIndex = indexRows[indexRows.length-1];
-    	
-    	if(direction == UP){
-    		if(firstIndex == 0) return;
-    		rows.add(lastIndex, rows.remove(firstIndex-1));
-    	}
-    	else if(direction == DOWN){
-    		if(lastIndex == rows.size()-2) return;
-    		rows.add(firstIndex, rows.remove(lastIndex+1));
-    		
-    	}
-    	//Actualise le tableau
+
+        if(indexRows.length <= 0) return;
+        int firstIndex = indexRows[0];
+        int lastIndex = indexRows[indexRows.length-1];
+
+        if(direction == UP){
+            if(firstIndex == 0) return;
+            rows.add(lastIndex, rows.remove(firstIndex-1));
+        }
+        else if(direction == DOWN){
+            if(lastIndex == rows.size()-2) return;
+            rows.add(firstIndex, rows.remove(lastIndex+1));
+
+        }
+        //Actualise le tableau
         fireTableDataChanged();
-	}
+    }
 
     /**
      * Indique si une donnée est présente dans la table
-     * 
+     *
      * @param code
      *            code de la donnée.
      */
@@ -251,7 +258,7 @@ public class DictionnaireTable extends AbstractTableModel
 
     /**
      * Retourne l'identifiant d'une information
-     * 
+     *
      * @param i
      *            index du code à retourner
      */
@@ -272,7 +279,7 @@ public class DictionnaireTable extends AbstractTableModel
 
     /**
      * Retourne la valeur d'une case.
-     * 
+     *
      * @param row
      *            ligne de la case
      * @param col
@@ -280,7 +287,11 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public Object getValueAt(int row, int col)
     {
-        return rows.get(row)[col];
+        if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
+            return getEntityNameOfProperty(row);
+        } else {
+            return rows.get(row)[col];
+        }
     }
 
     /**
@@ -306,9 +317,9 @@ public class DictionnaireTable extends AbstractTableModel
     }
 
     /**
-     * 
+     *
      * Retourne le numéro de ligne d'une donnée.
-     * 
+     *
      * @param ID
      *            identifiant de la donnée
      */
@@ -330,7 +341,7 @@ public class DictionnaireTable extends AbstractTableModel
                 return false;
         return true;
     }
-    
+
     /**
      * Retourne le nombre de colonnes.
      */
@@ -349,7 +360,7 @@ public class DictionnaireTable extends AbstractTableModel
 
     /**
      * Retourne le nom d'une colonne.
-     * 
+     *
      * @param col
      *            index de la colonne
      */
@@ -360,7 +371,7 @@ public class DictionnaireTable extends AbstractTableModel
 
     /**
      * Retourne le type d'une information selon la colonne.
-     * 
+     *
      * @param col
      *            colonne
      */
@@ -376,14 +387,14 @@ public class DictionnaireTable extends AbstractTableModel
     {
         return types;
     }
-    
+
     public boolean verifySize(int i)    {
     	
     	/*
     	 * Reprendre la fonctionnalité de vérification des types
     	 * pour la v0.7
     	 */
-    	return true;
+        return true;
     	
     	/*
     	int size = ((Integer)data[i][DictionnaireTable.SIZE]).intValue();
@@ -420,7 +431,7 @@ public class DictionnaireTable extends AbstractTableModel
     		return false;
     	
     	*/
-    	
+
     }
 
     /**
@@ -428,10 +439,9 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean isCellEditable(int row, int col)
     {
-        if (col == ID || col == USE)
+        if (col == ID || col == USE || col == ENTITY)
             return false;
         return true;
-
     }
 
     /**
@@ -445,7 +455,7 @@ public class DictionnaireTable extends AbstractTableModel
         // Vérifie que l'identifiant n'existe pas déjà.
         if ((col == NAME
                 && contains(Utilities.normaliseString((String) value,
-                        Constantes.LOWER)) && getIndex(Utilities
+                Constantes.LOWER)) && getIndex(Utilities
                 .normaliseString((String) value, Constantes.LOWER)) != row)
                 || (col == NAME && value.equals(""))
                 || (!isCellEditable(row, col)))
@@ -454,14 +464,14 @@ public class DictionnaireTable extends AbstractTableModel
         // Transforme la chaine de caractère en Integer
         if (rows.get(0)[col] instanceof Integer && value instanceof String) {
             try {
-            	rows.get(row)[col] = new Integer(value.toString());
+                rows.get(row)[col] = new Integer(value.toString());
             } catch (NumberFormatException e) {
             }
         } else {
-        	rows.get(row)[col] = value;
+            rows.get(row)[col] = value;
 
             if (col == NAME) {
-            	rows.get(row)[ID] = Utilities.normaliseString(
+                rows.get(row)[ID] = Utilities.normaliseString(
                         (String) (rows.get(row)[NAME]), Constantes.LOWER);
                 observable
                         .notifyObservers(new ArgObserverTable(
@@ -482,11 +492,37 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public void clear()
     {
-    	rows.clear();
+        rows.clear();
         addNewLine();
 
         observable.deleteObservers();
 
         fireTableDataChanged();
+    }
+
+    /**
+     * Retourne le nom de l'entité dans laquelle la propriété (de la row) est utilisée.
+     * (Bug #712439)
+     *
+     * @param row
+     *             ligne de la case (propriété du dictionnaire)
+     *
+     * @return Le nom de l'entité dans laquelle la propriété (de la row) est utilisée.
+     */
+    private String getEntityNameOfProperty(int row)
+    {
+        MeriseModule meriseModule = (MeriseModule)Main.getModule("MERISE");
+
+        for(Iterator<ZElement> e = meriseModule.getMCDComponent().enumElements(); e.hasNext();) {
+            MCDObjet o = (MCDObjet)e.next();
+            for (int i = 0; i < o.sizeInformation(); i++) {
+
+                if (rows.get(row)[ID] != null && o.getCodeInformation(i).equals(rows.get(row)[ID])) {
+                    return o.getName();
+                }
+            }
+        }
+
+        return "";
     }
 }
