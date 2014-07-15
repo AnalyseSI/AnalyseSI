@@ -15,7 +15,7 @@
         <pathelement location="build"/>
         <pathelement location="lib/looks-1.2.2.jar"/>    	
     	<pathelement location="lib/mysql-connector-java-5.1.10-bin.jar"/>
-    	<pathelement location="lib/postgresql-8.4-701.jdbc4.jar"/>
+    	<pathelement location="lib/postgresql-9.3-1102.jdbc41.jar"/>
         <pathelement location="lib/forms-1.0.5.jar"/>
     </path>
     <target name="init">
@@ -58,9 +58,7 @@
         </java>
     </target>
 
-    <target name="package-for-store">        
-        <property file="nbproject/configs/${config}.properties"/>
-        <property file="nbproject/project.properties"/>
+    <target name="package-for-store">
 
         <!-- Change the value of this property to be the name of your JAR,
              minus the .jar extension. It should not have spaces.
