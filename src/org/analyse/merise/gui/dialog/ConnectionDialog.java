@@ -89,7 +89,7 @@ public class ConnectionDialog extends JDialog
 
         urlStartConnections = new String[3];
         urlStartConnections[0] = "jdbc:mysql://localhost/database";    // exemple d'url 
-        urlStartConnections[1] = "jdbc:postgresql:";
+        urlStartConnections[1] = "jdbc:postgresql://localhost:port/database";
         urlStartConnections[2] = "jdbc:odbc:";
 
         initAction();

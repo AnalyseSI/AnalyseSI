@@ -248,8 +248,8 @@ public class AnalyseFrame extends JFrame {
 			FileOutputStream fos = new FileOutputStream(new File(
 					Main.USER_PROPS));
 
-			props.setProperty("X", "0");
-			props.setProperty("Y", "0");
+			props.setProperty("X", "400");
+			props.setProperty("Y", "250");
 			props.setProperty("width", "640");
 			props.setProperty("height", "480");
 			props.setProperty("tree", "true");

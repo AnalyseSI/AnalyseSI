@@ -6,8 +6,6 @@ Une mailing-list est ouverte sur analysesi@lists.launchpad.net
 
 ----------------------
 Corrections apportées
-RELEASE : 0.75 ( Rockhampton )
-Date : janvier 2011
+RELEASE : 0.76 ( Bundaberg )
+Date : avril 2014
 ----------------------
-#505822	Utiliser l'outil curseur par défaut dans la vue MCD
-#517141	Ajouter le modèle MLDR
