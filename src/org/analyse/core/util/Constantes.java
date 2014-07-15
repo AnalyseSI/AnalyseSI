@@ -61,7 +61,7 @@ public class Constantes {
     public static final String FILE_PNG_MCD= "mcd.png" ;
     public static final String FILE_PNG_MPD= "mpd.png" ;
     public static final String FILE_PNG_DOWN= "1downarrow.png" ;
-    public static final String FILE_PNG_DELETE = "stop.png" ;
+    public static final String FILE_PNG_DELETE = "delete.png" ;
     public static final String FILE_PNG_ENTITE = "entite.png" ;
     public static final String FILE_PNG_HOME = "folder_home.png" ;
     public static final String FILE_PNG_PARAMETRAGE = "parametrage.png" ;
