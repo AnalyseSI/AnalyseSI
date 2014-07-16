@@ -150,11 +150,11 @@ public class Constantes {
     public static final String UNDO = "UNDO" ;
     public static final String SHOWHIDE_NAVIGATOR="SHOWHIDE_NAVIGATOR" ;
     
-    public static final Color COULEUR_FOND_MLD = new Color (0xCCCCCC) ;  
-    public static final Color COULEUR_FOND_MCD = new Color (0xC4D7ED) ;
-    public static final Color COULEUR_FOND_MPD = Color.YELLOW ;
-    public static final Color COULEUR_FOND_SQL = new Color (0xF7F2B2) ;
-    public static final Color COULEUR_FOND_RAPPORT = Color.YELLOW ;
+    public static final Color COULEUR_FOND_MLD = Color.WHITE ; // new Color (0xCCCCCC) ;
+    public static final Color COULEUR_FOND_MCD = Color.WHITE ; // new Color (0xC4D7ED) ;
+    public static final Color COULEUR_FOND_MPD = Color.WHITE ;
+    public static final Color COULEUR_FOND_SQL = Color.WHITE ; //new Color (0xF7F2B2) ;
+    public static final Color COULEUR_FOND_RAPPORT = Color.WHITE ; //Color.YELLOW ;
     public static final Color COULEUR_FOND_POPUP = new Color (0xB5E655);
     
     // MULTI-LANGAGE
