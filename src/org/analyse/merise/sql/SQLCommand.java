@@ -66,6 +66,9 @@ public class SQLCommand {
 
 	private List<String> typesWithoutSize;
 
+    //
+    public static enum SQLsyntax { MySQL, PostgreSQL};
+
 	public SQLCommand() {
 		observableSQL = new ObservableSQL();
 
@@ -146,6 +149,11 @@ public class SQLCommand {
 
 	    types.add("ENUM") ;
 	    types.add("SET") ;
+
+        // PostgreSQL specific types.
+        types.add("SERIAL");
+        types.add("BIGSERIAL");
+        types.add("TIMESTAMP");
 		
 	    
 	    // les types sans taille

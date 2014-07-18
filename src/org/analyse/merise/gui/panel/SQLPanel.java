@@ -42,16 +42,7 @@ import java.util.Observer;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
+import javax.swing.*;
 
 import org.analyse.core.gui.action.BasicAction;
 import org.analyse.core.gui.menu.ClipboardPopupMenu;
@@ -86,6 +77,8 @@ public class SQLPanel extends AnalysePanel implements Observer,
 	private JTextField state;
 
 	private JFileChooser chooser;
+
+    private JComboBox jrbSQLSyntax;
 
 	private Map requestsSelected;
 
@@ -166,6 +159,13 @@ public class SQLPanel extends AnalysePanel implements Observer,
 				addMouseListener(Main.statusbar.getHandler());
 			}
 		});
+
+        // SQL Syntax selection combobox.
+        jrbSQLSyntax = new JComboBox(SQLCommand.SQLsyntax.values());
+        jrbSQLSyntax.setSelectedIndex(0);
+        toolbar.add(new JToolBar.Separator());
+        toolbar.add(new JLabel(Utilities.getLangueMessage("sql_syntax")));
+        toolbar.add(jrbSQLSyntax);
 	}
 
 	private void initAction() {
@@ -359,4 +359,13 @@ public class SQLPanel extends AnalysePanel implements Observer,
 				popup.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
+
+    /**
+     * Returns the selected SQL syntax.
+     *
+     * @return SQL syntax: 'MySQL' or 'PostgreSQL'
+     */
+    public String getSQLSyntax(){
+        return jrbSQLSyntax.getSelectedItem().toString();
+    }
 }

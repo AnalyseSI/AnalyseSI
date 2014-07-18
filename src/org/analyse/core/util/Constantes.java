@@ -263,4 +263,10 @@ public class Constantes {
     public static final String INT_AUTO_INCREMENT = "INT" ;
     public static final String BIGINT_AUTO_INCREMENT = "BIGINT" ;
     public static final String AUTO_INCREMENT = "INT" ;
+    public static final String INT = "INT" ;
+    public static final String BIGINT = "BIGINT" ;
+    public static final String INT_AUTO_INCREMENT_POSTGRESQL = "SERIAL" ;
+    public static final String BIGINT_AUTO_INCREMENT_POSTGRESQL = "BIGSERIAL" ;
+    public static final String DATETIME = "DATETIME" ;
+    public static final String TIMESTAMP_POSTGRESQL = "TIMESTAMP" ;
 }

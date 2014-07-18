@@ -5,8 +5,45 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library" exported="">
+      <library name="looks-1.2.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/looks-1.2.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="forms-1.0.5.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/forms-1.0.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="mysql-connector-java-5.1.10-bin.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.10-bin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="postgresql-8.4-701.jdbc4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/postgresql-8.4-701.jdbc4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+>>>>>>> 6ab09047087354c974c0c8d7ec0fbab06d52c514
     <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
