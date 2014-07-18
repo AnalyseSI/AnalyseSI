@@ -78,6 +78,8 @@ public class SQLPanel extends AnalysePanel implements Observer,
 
 	private JFileChooser chooser;
 
+    private JComboBox jrbSQLSyntax;
+
 	private Map requestsSelected;
 
 	private Map requestsColorized;
@@ -159,8 +161,7 @@ public class SQLPanel extends AnalysePanel implements Observer,
 		});
 
         // SQL Syntax selection combobox.
-        String[] sqlSyntaxStrings = {"MySQL", "PostgreSQL"};
-        JComboBox jrbSQLSyntax = new JComboBox(sqlSyntaxStrings);
+        jrbSQLSyntax = new JComboBox(SQLCommand.SQLsyntax.values());
         jrbSQLSyntax.setSelectedIndex(0);
         toolbar.add(new JToolBar.Separator());
         toolbar.add(new JLabel(Utilities.getLangueMessage("sql_syntax")));
@@ -358,4 +359,13 @@ public class SQLPanel extends AnalysePanel implements Observer,
 				popup.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
+
+    /**
+     * Returns the selected SQL syntax.
+     *
+     * @return SQL syntax: 'MySQL' or 'PostgreSQL'
+     */
+    public String getSQLSyntax(){
+        return jrbSQLSyntax.getSelectedItem().toString();
+    }
 }

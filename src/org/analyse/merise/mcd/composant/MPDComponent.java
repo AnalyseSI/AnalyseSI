@@ -32,7 +32,10 @@ import org.analyse.core.gui.zgraph.ZElement;
 import org.analyse.core.gui.zgraph.ZGraphique;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
+import org.analyse.main.Main;
+import org.analyse.merise.gui.panel.SQLPanel;
 import org.analyse.merise.gui.table.DictionnaireTable;
+import org.analyse.merise.main.MeriseModule;
 import org.analyse.merise.sql.SQLCommand;
 
 public class MPDComponent extends ZGraphique {
@@ -121,6 +124,10 @@ public class MPDComponent extends ZGraphique {
         MPDEntite ent;
         int cmp, nbId;
 
+        // SQL syntax.
+        MeriseModule meriseModule = (MeriseModule) Main.getModule("MERISE");
+        String sqlSyntax = ((SQLPanel)meriseModule.getSQLPanel()).getSQLSyntax();
+
         sql.clear();
 
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
@@ -164,6 +171,23 @@ public class MPDComponent extends ZGraphique {
                     type = defautType;
                 }
 
+                // PostgreSQL specific auto increment: SERIAL
+                if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
+                    if(type.equals(Constantes.INT)) {
+                        type = Constantes.INT_AUTO_INCREMENT_POSTGRESQL;
+                    } else if(type.equals(Constantes.BIGINT)) {
+                        type = Constantes.BIGINT_AUTO_INCREMENT_POSTGRESQL;
+                    }
+                }
+
+                // PostgreSQL: convert DATETIME to TIMESTAMP
+                if (sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
+
+                    if (type.equals(Constantes.DATETIME)) {
+                        type = Constantes.TIMESTAMP_POSTGRESQL;
+                    }
+                }
+
                 if (premier_auto_increment) {
                 	/* 
                 	 * traiter le cas des relations ternaires   
@@ -199,9 +223,12 @@ public class MPDComponent extends ZGraphique {
                     }
                 }
 
-                if (premier_auto_increment)
-                     text += "  AUTO_INCREMENT" ;
-
+                if (premier_auto_increment) {
+                    // Only for MySQL syntax.
+                    if (sqlSyntax.equals(SQLCommand.SQLsyntax.MySQL.toString())) {
+                        text += " AUTO_INCREMENT";
+                    }
+                }
 
                 if (cmp < nbId) {
                     text += " NOT NULL";
@@ -242,10 +269,18 @@ public class MPDComponent extends ZGraphique {
                 }
             }
 
-            text += ") ) ENGINE=InnoDB;";
+            text += "))";
+
+            // MySQL syntax
+            if (sqlSyntax.equals(SQLCommand.SQLsyntax.MySQL.toString()))
+            {
+                text += " ENGINE=InnoDB;";
+            }
+            else {  // other syntax (PostgreSQL, ...)
+                text += ";";
+            }
 
             sql.addRequest(text);
-
         }
 
 
