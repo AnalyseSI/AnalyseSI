@@ -143,7 +143,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 	private void initAction() {
 
 		save = new BasicAction(
-				"Sauvegarder le script",
+				null,
 				Utilities.getLangueMessage(Constantes.MESSAGE_SAUVEGARDER_SCRIPT_MLD),
 				"SAVEMLD", GUIUtilities.getImageIcon(Constantes.FILE_PNG_SAVE), 0, null);
 		save.addActionListener(actionHandler);

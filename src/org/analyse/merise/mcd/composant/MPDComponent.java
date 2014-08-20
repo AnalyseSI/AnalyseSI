@@ -32,7 +32,10 @@ import org.analyse.core.gui.zgraph.ZElement;
 import org.analyse.core.gui.zgraph.ZGraphique;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
+import org.analyse.main.Main;
+import org.analyse.merise.gui.panel.SQLPanel;
 import org.analyse.merise.gui.table.DictionnaireTable;
+import org.analyse.merise.main.MeriseModule;
 import org.analyse.merise.sql.SQLCommand;
 
 public class MPDComponent extends ZGraphique {
@@ -68,7 +71,7 @@ public class MPDComponent extends ZGraphique {
 
     /**
      * @return un MPDEntite
-     * @param nom
+     * @param name
      *            Nom de l'entité à retourner
      */
     public MPDEntite getMPDEntite(String name) {
@@ -121,13 +124,12 @@ public class MPDComponent extends ZGraphique {
         MPDEntite ent;
         int cmp, nbId;
 
+        // SQL syntax.
+        MeriseModule meriseModule = (MeriseModule) Main.getModule("MERISE");
+        String sqlSyntax = ((SQLPanel)meriseModule.getSQLPanel()).getSQLSyntax();
+
         sql.clear();
-        
-        text = "# script créé le : " + new java.util.Date() + " -   syntaxe MySQL ;";
-        sql.addRequest(text);        
-        text = "# use  VOTRE_BASE_DE_DONNEE ;" ;        
-        sql.addRequest(text);
-        
+
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
             ent = (MPDEntite) (e.next());
             text = "DROP TABLE IF EXISTS " + Utilities.normaliseString(ent.getName(), Constantes.LOWER) + " ;";            
@@ -169,19 +171,41 @@ public class MPDComponent extends ZGraphique {
                     type = defautType;
                 }
 
+                // PostgreSQL specific auto increment: SERIAL
+                if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
+                    if(type.equals(Constantes.INT)) {
+                        type = Constantes.INT_AUTO_INCREMENT_POSTGRESQL;
+                    } else if(type.equals(Constantes.BIGINT)) {
+                        type = Constantes.BIGINT_AUTO_INCREMENT_POSTGRESQL;
+                    }
+                }
+
+                // PostgreSQL: convert DATETIME to TIMESTAMP
+                if (sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
+
+                    if (type.equals(Constantes.DATETIME)) {
+                        type = Constantes.TIMESTAMP_POSTGRESQL;
+                    }
+                }
+
                 if (premier_auto_increment) {
                 	/* 
                 	 * traiter le cas des relations ternaires   
                 	 */
                 	
-                    if ("AUTO_INCREMENT".equals(type)) {
-                        type = Constantes.INT_AUTO_INCREMENT;  // Bug #567501
+                    if ("INT_AUTO_INCREMENT".equals(type)) {
+                        type = Constantes.INT_AUTO_INCREMENT ;  // Bug #567501
+                    }
+                    if ("BIGINT_AUTO_INCREMENT".equals(type)) {
+                        type = Constantes.BIGINT_AUTO_INCREMENT;  // Bug #567501
                     }
                 } else {
-                    if ("AUTO_INCREMENT".equals(type)) {
+                    if ("BIGINT_AUTO_INCREMENT".equals(type)) {
+                        type = "BIGINT";
+                    }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
+                    if ("INT_AUTO_INCREMENT".equals(type)) {
                         type = "INT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
-
                 }
                 
                 info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
@@ -196,6 +220,13 @@ public class MPDComponent extends ZGraphique {
 
                     if (!defautSize.equals("")) {
                         text += "(" + defautSize + ")";
+                    }
+                }
+
+                if (premier_auto_increment) {
+                    // Only for MySQL syntax.
+                    if (sqlSyntax.equals(SQLCommand.SQLsyntax.MySQL.toString())) {
+                        text += " AUTO_INCREMENT";
                     }
                 }
 
@@ -238,10 +269,18 @@ public class MPDComponent extends ZGraphique {
                 }
             }
 
-            text += ") ) ENGINE=InnoDB;";
+            text += "))";
+
+            // MySQL syntax
+            if (sqlSyntax.equals(SQLCommand.SQLsyntax.MySQL.toString()))
+            {
+                text += " ENGINE=InnoDB;";
+            }
+            else {  // other syntax (PostgreSQL, ...)
+                text += ";";
+            }
 
             sql.addRequest(text);
-
         }
 
 

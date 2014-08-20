@@ -66,6 +66,9 @@ public class SQLCommand {
 
 	private List<String> typesWithoutSize;
 
+    //
+    public static enum SQLsyntax { MySQL, PostgreSQL};
+
 	public SQLCommand() {
 		observableSQL = new ObservableSQL();
 
@@ -113,7 +116,8 @@ public class SQLCommand {
 	    types.add("SMALLINT") ;
 	    types.add("MEDIUMINT") ;
 	    types.add("INT") ;
-            types.add("AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
+        types.add("INT_AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
+        types.add("BIGINT_AUTO_INCREMENT") ;  // oups, légère entorse (pour faire plaisir)
 	    types.add("INTEGER") ;
 	    types.add("BIGINT") ;
 	    types.add("TIMESTAMP") ;
@@ -145,6 +149,11 @@ public class SQLCommand {
 
 	    types.add("ENUM") ;
 	    types.add("SET") ;
+
+        // PostgreSQL specific types.
+        types.add("SERIAL");
+        types.add("BIGSERIAL");
+        types.add("TIMESTAMP");
 		
 	    
 	    // les types sans taille
@@ -297,6 +306,7 @@ public class SQLCommand {
 					+ driver
 					+ ", vérifiez que le driver JDBC se trouve bien dans le classpath";
 			//e.printStackTrace();
+            error += e.getMessage() ;
 			return false;
 		}
 
@@ -305,6 +315,7 @@ public class SQLCommand {
 			stmt = con.createStatement();
 		} catch (SQLException e) {
 			error = "Impossible de se connecter à la base de donnée, vérifier l'URL, le login et le password\net que votre database existe !";
+            error += e.getMessage() ;
 			//e.printStackTrace();
 			return false;
 		}

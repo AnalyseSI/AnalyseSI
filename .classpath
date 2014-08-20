@@ -5,6 +5,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/looks-1.2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/forms-1.0.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.10-bin.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/postgresql-8.4-701.jdbc4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/postgresql-9.3-1102.jdbc41.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
