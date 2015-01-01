@@ -4,7 +4,7 @@
     <libelement value="jar://$MODULE_DIR$/lib/looks-1.2.2.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/forms-1.0.5.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.10-bin.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/lib/postgresql-8.4-701.jdbc4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/lib/postgresql-9.3-1102.jdbc41.jar!/" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -45,9 +45,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
-      <library name="postgresql-8.4-701.jdbc4.jar">
+      <library name="postgresql-9.3-1102.jdbc41.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/postgresql-8.4-701.jdbc4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/postgresql-9.3-1102.jdbc41.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
