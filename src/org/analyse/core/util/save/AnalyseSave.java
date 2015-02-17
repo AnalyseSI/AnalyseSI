@@ -224,12 +224,7 @@ public class AnalyseSave {
     	int choix ;
     	    	
     	choix = GUIUtilities.question_YES_NO ( Utilities.getLangueMessage( Constantes.MESSAGE_FERMER_LOGICIEL )) ;
-    	if ( choix == JOptionPane.NO_OPTION ) 
-			/*
-			 *  exprès pour la fonction appelante NO dans ce cas est équivalent à CANCEL
-			 */
-			 choix = JOptionPane.CANCEL_OPTION ;    
-    	
+
     	if ( choix ==  JOptionPane.YES_OPTION ) {
 		
     		if ( this.fileName != null ) {
@@ -238,8 +233,13 @@ public class AnalyseSave {
 	    	    if (choix == JOptionPane.YES_OPTION)
 	    	        save();
     		}
-    	   	    
     	}
+        else {
+            /*
+			 *  exprès pour la fonction appelante NO dans ce cas est équivalent à CANCEL
+			 */
+            choix = JOptionPane.CANCEL_OPTION ;
+        }
     	
 	    return choix ; 
     }
