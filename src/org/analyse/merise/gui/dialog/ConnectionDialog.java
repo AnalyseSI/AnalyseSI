@@ -51,7 +51,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Cette fenetre permet d'établir une connection avec une base de donnée grace à
+ * Cette fenêtre permet d'établir une connection avec une base de donnée grâce à
  * la class SQLCommand.
  */
 public class ConnectionDialog extends JDialog
@@ -62,7 +62,7 @@ public class ConnectionDialog extends JDialog
 
     private SQLCommand sqlCommand;
 
-    private JComboBox driver;
+    private JComboBox<String> driver;
 
     private JTextField url, user, password;
 
