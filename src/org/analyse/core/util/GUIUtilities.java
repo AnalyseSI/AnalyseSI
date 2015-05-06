@@ -35,11 +35,16 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import org.analyse.core.gui.AnalyseFrame;
 import org.analyse.core.gui.HtmlWindow;
 
-public class GUIUtilities
+public final class GUIUtilities
 {
+	/**
+	 * Don't let anyone instantiate this class.
+	 */
+	private GUIUtilities() {};
+
+
 	// Hashtable contenant les images déjà chargées
 	// Permet de ne pas recharger les images à chaque
 	// fois dans un soucis de performance.
@@ -113,9 +118,7 @@ public class GUIUtilities
      */
     public static ImageIcon getImageIcon(String name)
     {
-    	Toolkit toolkit = Toolkit.getDefaultToolkit();
-    	
-        URL url;
+    	URL url;
 
         /*if (hashtable.containsKey(name) == true)
             return (ImageIcon) hashtable.get(name);
