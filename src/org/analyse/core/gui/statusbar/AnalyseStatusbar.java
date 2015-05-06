@@ -28,7 +28,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.event.MouseInputAdapter;
 
-import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
 
 public class AnalyseStatusbar extends JLabel
