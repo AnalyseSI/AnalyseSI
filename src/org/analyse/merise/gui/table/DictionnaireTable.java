@@ -287,11 +287,18 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public Object getValueAt(int row, int col)
     {
-        if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
-            return getEntityNameOfProperty(row);
-        } else {
-            return rows.get(row)[col];
+
+        try {  // protéger un peu plus notre code - suite à un bug remonté
+            if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
+                return getEntityNameOfProperty(row);
+            } else {
+                return rows.get(row)[col];
+            }
+        } catch (Exception $) {
+            return "**NOT FOUND**" ;
+
         }
+
     }
 
     /**
