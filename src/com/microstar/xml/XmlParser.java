@@ -863,7 +863,7 @@ public class XmlParser
             } else if (tryRead("<!--")) {
                 parseComment();
             } else {
-                return;
+                break;
             }
         }
     }
@@ -887,7 +887,6 @@ public class XmlParser
      */
     void parseDoctypedecl() throws java.lang.Exception
     {
-        char c;
         String doctypeName, ids[];
 
         // Read the document type name.
@@ -1411,8 +1410,6 @@ public class XmlParser
      */
     void parseMixed() throws java.lang.Exception
     {
-        char c;
-
         // Check for PCDATA alone.
         skipWhitespace();
         if (tryRead(')')) {
@@ -2643,9 +2640,8 @@ public class XmlParser
         Object element[] = (Object[]) elementInfo.get(name);
         if (element == null) {
             return null;
-        } else {
-            return (Hashtable) element[2];
         }
+        return (Hashtable) element[2];
     }
 
     //
@@ -2883,9 +2879,8 @@ public class XmlParser
         Object entity[] = (Object[]) entityInfo.get(ename);
         if (entity == null) {
             return ENTITY_UNDECLARED;
-        } else {
-            return ((Integer) entity[0]).intValue();
         }
+        return ((Integer) entity[0]).intValue();
     }
 
     /**
@@ -2903,9 +2898,8 @@ public class XmlParser
         Object entity[] = (Object[]) entityInfo.get(ename);
         if (entity == null) {
             return null;
-        } else {
-            return (String) entity[1];
         }
+        return (String) entity[1];
     }
 
     /**
@@ -2922,9 +2916,8 @@ public class XmlParser
         Object entity[] = (Object[]) entityInfo.get(ename);
         if (entity == null) {
             return null;
-        } else {
-            return (String) entity[2];
         }
+        return (String) entity[2];
     }
 
     /**
@@ -2941,9 +2934,8 @@ public class XmlParser
         Object entity[] = (Object[]) entityInfo.get(ename);
         if (entity == null) {
             return null;
-        } else {
-            return (String) entity[3];
         }
+        return (String) entity[3];
     }
 
     /**
@@ -2960,9 +2952,8 @@ public class XmlParser
         Object entity[] = (Object[]) entityInfo.get(eName);
         if (entity == null) {
             return null;
-        } else {
-            return (String) entity[4];
         }
+        return (String) entity[4];
     }
 
     /**
@@ -3044,9 +3035,8 @@ public class XmlParser
         Object notation[] = (Object[]) notationInfo.get(nname);
         if (notation == null) {
             return null;
-        } else {
-            return (String) notation[0];
         }
+        return (String) notation[0];
     }
 
     /**
@@ -3065,9 +3055,8 @@ public class XmlParser
         Object notation[] = (Object[]) notationInfo.get(nname);
         if (notation == null) {
             return null;
-        } else {
-            return (String) notation[1];
         }
+        return (String) notation[1];
     }
 
     /**
@@ -4346,7 +4335,7 @@ public class XmlParser
 
     private int sourceType; // type of input source
 
-    private Stack inputStack = new Stack () ; // stack of input soruces
+    private Stack inputStack = new Stack () ; // stack of input sources
 
     private URLConnection externalEntity; // current external entity
 

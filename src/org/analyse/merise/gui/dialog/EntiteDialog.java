@@ -48,7 +48,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import org.analyse.core.gui.action.BasicAction;
 import org.analyse.core.util.Constantes;
@@ -113,11 +112,11 @@ public class EntiteDialog extends JDialog
 
         initAction();
 
-        listGauche = new MeriseListModel();         
+        listGauche = new MeriseListModel();
         listDroite = new MeriseListModel();
 
         //Bug #347422
-        listGauche.clear() ;        
+        listGauche.clear() ;
         listDroite.clear() ;
        
         Container c = this.getContentPane();
@@ -267,7 +266,7 @@ public class EntiteDialog extends JDialog
                     }
                 });
 
-            }            
+            }
         };
         
     
@@ -281,12 +280,12 @@ public class EntiteDialog extends JDialog
         handler = new ActionHandler();
         mouseHandler = new MouseHandler();
 
-        ok = new BasicAction( Utilities.getLangueMessage ("ok"), 
+        ok = new BasicAction( Utilities.getLangueMessage ("ok"),
         		Utilities.getLangueMessage (Constantes.MESSAGE_ENREGISTRER_CHANGEMENT), Constantes.OK, null,
                 0, null);
         ok.addActionListener(handler);
-        cancel = new BasicAction(Utilities.getLangueMessage (Constantes.MESSAGE_ANNULER), 
-        		Utilities.getLangueMessage (Constantes.MESSAGE_ANNULER_CHANGEMENT), 
+        cancel = new BasicAction(Utilities.getLangueMessage (Constantes.MESSAGE_ANNULER),
+        		Utilities.getLangueMessage (Constantes.MESSAGE_ANNULER_CHANGEMENT),
                 Constantes.CANCEL, null, 0, null);
         cancel.addActionListener(handler);
 
@@ -294,7 +293,7 @@ public class EntiteDialog extends JDialog
                 Constantes.RIGHT, GUIUtilities.getImageIcon(Constantes.FILE_PNG_RIGHT), 0, null);
         right.addActionListener(handler);
 
-        left = new BasicAction("", 
+        left = new BasicAction("",
         		Utilities.getLangueMessage (Constantes.MESSAGE_RETIRER_INFORMATION),
         		Constantes.LEFT,
                 GUIUtilities.getImageIcon(Constantes.FILE_PNG_LEFT), 0, null);
@@ -313,13 +312,13 @@ public class EntiteDialog extends JDialog
                 GUIUtilities.getImageIcon(Constantes.FILE_PNG_DOWN), 0, null);
         descendre.addActionListener(handler);
 
-        validerNom = new BasicAction("", 
+        validerNom = new BasicAction("",
         		Utilities.getLangueMessage (Constantes.MESSAGE_MODIFIER_NOM_ENTITE), Constantes.STR_NAME,
                 null, 0, null);
         validerNom.addActionListener(handler);
 
-        ajout = new BasicAction(Utilities.getLangueMessage (Constantes.MESSAGE_AJOUT) , 
-        		Utilities.getLangueMessage (Constantes.MESSAGE_AJOUT_RAPIDE_INFORMATION) , 
+        ajout = new BasicAction(Utilities.getLangueMessage (Constantes.MESSAGE_AJOUT) ,
+        		Utilities.getLangueMessage (Constantes.MESSAGE_AJOUT_RAPIDE_INFORMATION) ,
                 Constantes.AJOUT, null, 0, null);
         ajout.addActionListener(handler);
     }
@@ -356,31 +355,30 @@ public class EntiteDialog extends JDialog
     {
 
        /* bug : 347422
-       listGauche.clear(); 
-       listDroite.clear();  
+       listGauche.clear();
+       listDroite.clear();
     	*/
-            	
+        
         String code = null ;
-                 
+        
         for (int i = 0; i < data.getRowCount() - 1; i++) {
             code = data.getID(i);
 
-            if (!data.getUse(i)) {                    	 
+            if (!data.getUse(i)) {
             	// bug : 347422
             	if ( ! listDroite.getListLabel().containsKey( code ) )   {
             		listGauche.addElement(code, (String) data.getValue(code,
-                		DictionnaireTable.NAME));            		                  		
+                		DictionnaireTable.NAME));
             	}
-            }       
+            }
         }
         
         for (Iterator<String> e = mcdobject.elementsInformations(); e
                 .hasNext();) {
             code = (String) e.next();
             listDroite.addElement(code, (String) data.getValue(code,
-                    DictionnaireTable.NAME));       
+                    DictionnaireTable.NAME));
         }
-        
     }
 
     /**
@@ -392,8 +390,8 @@ public class EntiteDialog extends JDialog
         List<String> keys = new ArrayList<String>();
         for (int i = 0; i < listGauche.getSize(); i++) {
             if (gauche.isSelectedIndex(i)) {
-                keys.add(listGauche.getKey(i));                
-                data.setUse(data.getID(i), true ) ;  // bug : 347422                
+                keys.add(listGauche.getKey(i));
+                data.setUse(data.getID(i), true ) ;  // bug : 347422
             }
             
         }
@@ -500,8 +498,7 @@ public class EntiteDialog extends JDialog
             mcdobject.setName(nom.getText());
             close();
         } else {
-        	
-        	Object[] messageArguments = { nom.getText() } ; 
+        	Object[] messageArguments = { nom.getText() } ;
         	String messEntite = Utilities.getLangueMessageFormatter (Constantes.MESSAGE_ENTITE_EXISTE_CHANGER_NOM, messageArguments ) ; 
         	String messAssociation = Utilities.getLangueMessageFormatter (Constantes.MESSAGE_ASSOCIATION_EXISTE_CHANGER_NOM, messageArguments ) ;
         	
@@ -510,7 +507,7 @@ public class EntiteDialog extends JDialog
     }
 
     /**
-     * Ferme la fenetre.
+     * Ferme la fenêtre.
      */
     private void close()
     {
@@ -541,15 +538,14 @@ public class EntiteDialog extends JDialog
                         + "</b></font></html>");
             } else if (action.equals("AJOUT")) {
             	
-            	/* cette règle est remise en cause - voir bug #689257 
-            	* pour l'instant on laisse tel quel 
+            	/* cette règle est remise en cause - voir bug #689257
+            	* pour l'instant on laisse tel quel
             	*/
-            	 if ( ! nomInfo.getText().equals("") )
-                      
+            	 if ( ! nomInfo.getText().isEmpty() )
                  	/*  Pouvoir utilisé le même nom d'attribut => entorse à Merise mais beaucoup utilisé dans la pratique
 
                  	if ( data.contains ( nomInfo.getText() ) ) {
-                    	Object[] messageArguments = { nomInfo.getText() } ;                     	                  		
+                    	Object[] messageArguments = { nomInfo.getText() } ;
                  		GUIUtilities.error (Utilities.getLangueMessageFormatter (Constantes.MESSAGE_PROPRIETE_EXISTE, messageArguments ) );
          	    		return ;
                  	}

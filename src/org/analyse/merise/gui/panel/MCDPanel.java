@@ -82,9 +82,6 @@ import com.sun.imageio.plugins.png.PNGImageWriter;
 
 public class MCDPanel extends AnalysePanel
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1318663913915137489L;
 
 	private ActionHandler actionHandler;
@@ -598,11 +595,9 @@ public class MCDPanel extends AnalysePanel
                 }
 
             }
-            
             else if (e.getButton() == MouseEvent.BUTTON1 && typeAction.equals(Constantes.ADD_LIEN)) {
             	mcdComponent.addLien();
-            }            
-            
+            }
         }
 
         public void mouseClicked(MouseEvent e)
