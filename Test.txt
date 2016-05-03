@@ -1,3 +1,0 @@
-Dans le cadre du stage de fin d'année, j'étudie AnalyseSI.
-Ici je vérifie que si j'ajoute un fichier dans mon Espace Personnel,
-alors cela ne modifie pas le Projet Maître (original).
