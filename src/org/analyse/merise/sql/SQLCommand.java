@@ -66,8 +66,8 @@ public class SQLCommand {
 
 	private List<String> typesWithoutSize;
 
-    //
-    public static enum SQLsyntax { MySQL, PostgreSQL};
+    // Syntaxes SQL disponibles
+    public static enum SQLsyntax { MySQL, PostgreSQL, OracleDB};
 
 	public SQLCommand() {
 		observableSQL = new ObservableSQL();
@@ -103,6 +103,24 @@ public class SQLCommand {
 		keywords.add("REFERENCES");
 		keywords.add("FOREIGN");
 		keywords.add("KEY");
+		/*
+		 * Edité par B. Bouffet le 12/05/2016
+		 * Mots-clés spécifiques Oracle Database
+		 * Permettent de définir l'équivalent du type MySQL AUTO_INCREMENT
+		 * Génération de code compatible avec Oracle : à venir... 
+		 */
+		keywords.add("TRIGGER");
+		keywords.add("SEQUENCE");
+		keywords.add("BEFORE");
+		keywords.add("ON");
+		keywords.add("FOR");
+		keywords.add("EACH");
+		keywords.add("ROW");
+		keywords.add("BEGIN");
+		keywords.add("SELECT");
+		keywords.add("INTO");
+		keywords.add("FROM");
+		keywords.add("END");
 	}
 
 	/**
@@ -155,12 +173,21 @@ public class SQLCommand {
         types.add("BIGSERIAL");
         types.add("TIMESTAMP");
 		
+		/*
+		 * Edité par B. Bouffet le 12/05/2016
+		 * Types spécifiques Oracle Database
+		 */
+		types.add("BOOLEAN");
+		types.add("VARCHAR2");
+		types.add("BINARY_FLOAT");
+		types.add("BINARY_DOUBLE");
 	    
 	    // les types sans taille
 		typesWithoutSize = new ArrayList<String>();
 
 	    typesWithoutSize.add("BIT") ; 
 	    typesWithoutSize.add("BOOL") ; 
+	    typesWithoutSize.add("BOOLEAN") ; 
 	    typesWithoutSize.add("BLOB") ; 
 		typesWithoutSize.add("DATE") ; 
 	    typesWithoutSize.add("DATETIME") ; 
