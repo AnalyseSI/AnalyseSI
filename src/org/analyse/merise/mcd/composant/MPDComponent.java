@@ -180,6 +180,16 @@ public class MPDComponent extends ZGraphique {
                     }
                 }
 
+				/*
+				 * Edité par B. Bouffet le 13/05/2016
+				 * Si syntaxe Oracle Database
+				 * Mémorisation des informations sur la table (nom + clé primaire)
+				 * Va permettre la création d'un trigger
+				 */
+				if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString())) {
+					
+				}
+		
                 // PostgreSQL: convert DATETIME to TIMESTAMP
                 if (sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
 
@@ -280,7 +290,36 @@ public class MPDComponent extends ZGraphique {
                 text += ";";
             }
 
-            sql.addRequest(text);
+        	sql.addRequest(text);
+        	
+       		/* Edité par B. Bouffet le 13/05/2016
+        	 * Création du trigger si AUTO_INCREMENT utilisé dans la table
+        	 * Syntaxe Oracle Database
+        	 */
+        	if (sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()))
+        	{
+        		text = "";
+        		text += "CREATE SEQUENCE SEQ_";
+        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += " ;";
+        		sql.addRequest(text);
+        		
+        		text = "";
+        		text += "CREATE TRIGGER TRIG_";
+        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += " BEFORE INSERT ON ";
+        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += " FOR EACH ROW ";
+        		text += " BEGIN";
+        		text += " SELECT SEQ_";
+        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += ".NEXTVAL";
+        		text += " INTO :NEW.";
+        		// text += e2.getInformation(); // récupère la clé primaire
+        		text += " FROM DUAL ;";
+        		text += " END ;";
+        		sql.addRequest(text);
+        	}
         }
 
 
