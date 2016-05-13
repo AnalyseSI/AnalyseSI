@@ -139,6 +139,10 @@ public class MPDComponent extends ZGraphique {
             
             cmp = 0;
             nbId = ent.sizeIdentifiant();
+            
+            // Stocke les identifiants d'une table qui sont AUTO_INCREMENT
+            Hashtable<String, String> autoIncrementIds = new Hashtable<String, String>();
+            nbAutoIncrement = 0;
 
             /*
              * bruno
@@ -180,16 +184,19 @@ public class MPDComponent extends ZGraphique {
                     }
                 }
 
-				/*
-				 * Edité par B. Bouffet le 13/05/2016
-				 * Si syntaxe Oracle Database
-				 * Mémorisation des informations sur la table (nom + clé primaire)
-				 * Va permettre la création d'un trigger
-				 */
-				if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString())) {
-					
-				}
-		
+			/*
+			 * Edité par B. Bouffet le 13/05/2016
+			 * Si syntaxe Oracle Database, mémorisation des clés primaires de type AUTO_INCREMENT.
+			 * Cela va permettre la création de triggers.
+			 */
+			if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString())) {
+				nbAutoIncrement++;
+				autoIncrementIds.put("Id # " + nbAutoIncrement, "id" + Utilities.normaliseString(ent.getName(), Constantes.LOWER));
+			}
+        	/*
+        	 * Fin de l'édition
+        	 */
+        	 
                 // PostgreSQL: convert DATETIME to TIMESTAMP
                 if (sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
 
@@ -293,33 +300,35 @@ public class MPDComponent extends ZGraphique {
         	sql.addRequest(text);
         	
        		/* Edité par B. Bouffet le 13/05/2016
-        	 * Création du trigger si AUTO_INCREMENT utilisé dans la table
-        	 * Syntaxe Oracle Database
+        	 * Syntaxe Oracle : création d'un trigger en cas d'identifiant de type AUTO_INCREMENT
         	 */
         	if (sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()))
         	{
         		text = "";
         		text += "CREATE SEQUENCE SEQ_";
-        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += " ;";
         		sql.addRequest(text);
         		
         		text = "";
         		text += "CREATE TRIGGER TRIG_";
-        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += " BEFORE INSERT ON ";
-        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += " FOR EACH ROW ";
         		text += " BEGIN";
         		text += " SELECT SEQ_";
-        		// text += e2.getInformation(); // récupère le nom de la table
+        		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += ".NEXTVAL";
         		text += " INTO :NEW.";
-        		// text += e2.getInformation(); // récupère la clé primaire
+        		text += autoIncrementIds.get("Id # 1");
         		text += " FROM DUAL ;";
         		text += " END ;";
         		sql.addRequest(text);
         	}
+        	/*
+        	 * Fin de l'édition
+        	 */
         }
 
 
