@@ -142,7 +142,7 @@ public class MPDComponent extends ZGraphique {
             
             // Stocke les identifiants d'une table qui sont AUTO_INCREMENT
             Hashtable<String, String> autoIncrementIds = new Hashtable<String, String>();
-            nbAutoIncrement = 0;
+            int nbAutoIncrement = 0;
 
             /*
              * bruno
@@ -191,7 +191,7 @@ public class MPDComponent extends ZGraphique {
 			 */
 			if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString())) {
 				nbAutoIncrement++;
-				autoIncrementIds.put("Id # " + nbAutoIncrement, "id" + Utilities.normaliseString(ent.getName(), Constantes.LOWER));
+				autoIncrementIds.put("Id # " + nbAutoIncrement, Utilities.normaliseString(ent.getCodeInformation(0), Constantes.LOWER));
 			}
         	/*
         	 * Fin de l'édition
@@ -304,7 +304,7 @@ public class MPDComponent extends ZGraphique {
         	 */
         	if ( sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()) && (!autoIncrementIds.isEmpty()) )
         	{
-        		text = "";
+        		text = "\n";
         		text += "CREATE SEQUENCE SEQ_";
         		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += " ;";
@@ -315,8 +315,8 @@ public class MPDComponent extends ZGraphique {
         		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += " BEFORE INSERT ON ";
         		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
-        		text += " FOR EACH ROW ";
-        		text += " BEGIN";
+        		text += " FOR EACH ROW \n";
+        		text += " BEGIN \n";
         		text += " SELECT SEQ_";
         		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += ".NEXTVAL";
