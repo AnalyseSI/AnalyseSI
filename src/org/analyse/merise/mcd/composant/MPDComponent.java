@@ -302,7 +302,7 @@ public class MPDComponent extends ZGraphique {
        		/* Edité par B. Bouffet le 13/05/2016
         	 * Syntaxe Oracle : création d'un trigger en cas d'identifiant de type AUTO_INCREMENT
         	 */
-        	if (sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()))
+        	if ( sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()) && (!autoIncrementIds.isEmpty()) )
         	{
         		text = "";
         		text += "CREATE SEQUENCE SEQ_";
