@@ -132,7 +132,38 @@ public class MPDComponent extends ZGraphique {
 
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
             ent = (MPDEntite) (e.next());
-            text = "DROP TABLE IF EXISTS " + Utilities.normaliseString(ent.getName(), Constantes.LOWER) + " ;";            
+                        
+            /* Edité par B. Bouffet le 18/05/2016
+             * "DROP TABLE IF EXISTS" non supporté par Oracle
+             * -> Adaptation de la syntaxe
+             * Un saut de ligne en trop après chaque point-virgule -> à corriger
+             */
+            text = "";
+            if ( sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()) )
+            {
+            	text = "DECLARE \n";
+            	text += "  existe_";
+            	text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
+            	text += " INTEGER ;";
+            	text += "BEGIN \n";
+            	text += "  SELECT count(*) INTO existe_";
+                text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
+            	text += " FROM user_tables WHERE table_name = upper('";
+            	text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
+            	text += "') ;";
+            	text += "  IF existe_";
+            	text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
+            	text += " > 0 THEN \n";
+            	text += "    EXECUTE IMMEDIATE 'DROP TABLE ";
+            	text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
+            	text += "' ;";
+            	text += "  END IF ;";
+            	text += "END ;";
+            }
+            else
+            {
+                text = "DROP TABLE IF EXISTS " + Utilities.normaliseString(ent.getName(), Constantes.LOWER) + " ;";
+            }
             sql.addRequest(text);
             
             text = "CREATE TABLE " + Utilities.normaliseString(ent.getName(), Constantes.LOWER) + " (";
@@ -301,6 +332,7 @@ public class MPDComponent extends ZGraphique {
         	
        		/* Edité par B. Bouffet le 13/05/2016
         	 * Syntaxe Oracle : création d'un trigger en cas d'identifiant de type AUTO_INCREMENT
+        	 * Un saut de ligne en trop après chaque point-virgule -> à corriger
         	 */
         	if ( sqlSyntax.equals(SQLCommand.SQLsyntax.OracleDB.toString()) && (!autoIncrementIds.isEmpty()) )
         	{
@@ -320,7 +352,7 @@ public class MPDComponent extends ZGraphique {
         		text += " SELECT SEQ_";
         		text += Utilities.normaliseString(ent.getName(), Constantes.LOWER) ;
         		text += ".NEXTVAL";
-        		text += " INTO :NEW.";
+        		text += " INTO :new.";
         		text += autoIncrementIds.get("Id # 1");
         		text += " FROM DUAL ;";
         		text += " END ;";
