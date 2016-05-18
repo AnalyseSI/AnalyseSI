@@ -156,7 +156,7 @@ public class MPDComponent extends ZGraphique {
             	text += " > 0 THEN \n";
             	text += "    EXECUTE IMMEDIATE 'DROP TABLE ";
             	text +=	Utilities.normaliseString(ent.getName(), Constantes.LOWER);
-            	text += "' ;";
+            	text += " CASCADE CONSTRAINTS' ;";
             	text += "  END IF ;";
             	text += "END ;";
             }
