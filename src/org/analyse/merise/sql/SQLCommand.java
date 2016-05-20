@@ -104,9 +104,10 @@ public class SQLCommand {
 		keywords.add("FOREIGN");
 		keywords.add("KEY");
 		/*
-		 * Edité par B. Bouffet le 12/05/2016
+		 * Edité par B. Bouffet le 20/05/2016
 		 * Mots-clés spécifiques Oracle Database
 		 * Permettent de définir l'équivalent du type MySQL AUTO_INCREMENT
+		 * ainsi que de la requête MySQL DROP TABLE IF EXISTS
 		 * Génération de code compatible avec Oracle : à venir... 
 		 */
 		keywords.add("TRIGGER");
@@ -117,10 +118,17 @@ public class SQLCommand {
 		keywords.add("EACH");
 		keywords.add("ROW");
 		keywords.add("BEGIN");
-		keywords.add("SELECT");
 		keywords.add("INTO");
 		keywords.add("FROM");
 		keywords.add("END");
+		
+		keywords.add("DECLARE");
+		keywords.add("WHERE");
+		keywords.add("IF");
+		keywords.add("THEN");
+		keywords.add("EXECUTE");
+		keywords.add("IMMEDIATE");
+		keywords.add("DROP");
 	}
 
 	/**
