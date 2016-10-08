@@ -23,18 +23,14 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import org.analyse.core.gui.action.BasicAction;
@@ -42,7 +38,6 @@ import org.analyse.core.util.Constantes;
 import org.analyse.core.util.GUIUtilities;
 import org.analyse.core.util.MyPanelFactory;
 import org.analyse.core.util.Utilities;
-import org.analyse.main.Main;
 
 /**
  * @author bruno dabo

@@ -21,8 +21,6 @@
 package org.analyse.merise.main;
 
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 import org.analyse.core.gui.AnalyseFrame;
 import org.analyse.core.gui.action.BasicAction;
@@ -41,8 +39,8 @@ import org.analyse.merise.gui.panel.SQLPanel;
 import org.analyse.merise.gui.table.DictionnaireTable;
 import org.analyse.merise.mcd.composant.MCDComponent;
 import org.analyse.merise.mcd.composant.MLDCommand;
-import org.analyse.merise.mcd.composant.MPDComponent;
 import org.analyse.merise.mcd.composant.MLDComponent;
+import org.analyse.merise.mcd.composant.MPDComponent;
 import org.analyse.merise.rapport.MeriseRapport;
 import org.analyse.merise.save.FiltreMeriseASI;
 import org.analyse.merise.sql.SQLCommand;

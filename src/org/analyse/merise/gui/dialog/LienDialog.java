@@ -52,7 +52,7 @@ public class LienDialog extends JDialog
 
     private JLabel title;
 
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
 
     private MCDLien mcdlien;
 
@@ -93,7 +93,7 @@ public class LienDialog extends JDialog
                 setLayout(new FlowLayout());
                 add(new JLabel( Utilities.getLangueMessage(Constantes.MESSAGE_CARDINALITE) + " : ", SwingConstants.LEFT),
                         BorderLayout.WEST);
-                add(comboBox = new JComboBox(card), BorderLayout.CENTER);
+                add(comboBox = new JComboBox<String>(card), BorderLayout.CENTER);
             }
         });
 
