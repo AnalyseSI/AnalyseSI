@@ -7,6 +7,8 @@
  *  -------------
  *  Date : 2009 janvier 22
  *  @auteur : Bruno Dabo <bruno.dabo@lywoonsoftware.com>
+ *  Date : 2017 Février 04
+ *  @auteur : Mehdi CHAABANI
  *   
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -120,7 +122,7 @@ public class MPDComponent extends ZGraphique {
      * Construit les requêtes SQL.
      */
     public void buildSQL(DictionnaireTable data, SQLCommand sql) {
-        String text, info ;
+        String text, info, info_wid ; //info_wid: permet le traitement des attributs non typés comme clefs
         MPDEntite ent;
         int cmp, nbId;
 
@@ -154,7 +156,8 @@ public class MPDComponent extends ZGraphique {
             for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext(); cmp++) {
 
                 info = (String) (e2.next());
-
+    		info_wid  = info;
+		    
                 if (premierefois) {  // ajout des relations reflexives
                     premierefois = false;
                     defautType = (String) data.getValue(info, DictionnaireTable.TYPE);
@@ -194,21 +197,26 @@ public class MPDComponent extends ZGraphique {
                 	 */
                 	
                     if ("INT_AUTO_INCREMENT".equals(type)) {
+			info = Utilities.normaliseString(info, Constantes.LOWER);
                         type = Constantes.INT_AUTO_INCREMENT ;  // Bug #567501
                     }
                     if ("BIGINT_AUTO_INCREMENT".equals(type)) {
+			info = Utilities.normaliseString(info, Constantes.LOWER);
                         type = Constantes.BIGINT_AUTO_INCREMENT;  // Bug #567501
                     }
                 } else {
+			info = String.valueOf(data.getValue(info_wid, DictionnaireTable.NAME));
                     if ("BIGINT_AUTO_INCREMENT".equals(type)) {
-                        type = "BIGINT";
+                        info = Utilities.normaliseString(info_wid, Constantes.LOWER);
+			type = "BIGINT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
                     if ("INT_AUTO_INCREMENT".equals(type)) {
-                        type = "INT";
+                        info = Utilities.normaliseString(info_wid, Constantes.LOWER);
+			type = "INT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
                 }
                 
-                info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
+                //info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
                 text += info + " " + type;
 
                 try {
@@ -237,7 +245,7 @@ public class MPDComponent extends ZGraphique {
 
                         if (ent.getForeignKey(info) != null) // on a affaire à une clé étrangère
                         {
-                            text += " NOT NULL";
+                            //text += " NOT NULL";
                         }
                     }
                 }
@@ -285,6 +293,7 @@ public class MPDComponent extends ZGraphique {
 
 
         info = "";
+	info_wid ="";
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
            
             ent = (MPDEntite) (e.next());
