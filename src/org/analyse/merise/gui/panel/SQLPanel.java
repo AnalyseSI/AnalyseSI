@@ -333,18 +333,18 @@ public class SQLPanel extends AnalysePanel implements Observer,
 					for (StringTokenizer st = new StringTokenizer(text, ";",
 							true); st.hasMoreElements();) {
 						str = st.nextToken();
-						str = str.replace(",", "," + Utilities.retourLigne() ) ;
+						str = str.replace(",", "," + Utilities.newLine() ) ;
 
 						if (str.equals(";"))
 							if ( oldStr.startsWith("DROP") || oldStr.startsWith("ALTER") )
 								
 								if ( ( oldStr.startsWith("ALTER") ) && ( firstAlter == false ) ) {
-									textFinal += ";" + Utilities.retourLigne() + Utilities.retourLigne();
+									textFinal += ";" + Utilities.newLine() + Utilities.newLine();
 									firstAlter = true ; 
 								} else
-									textFinal += ";" + Utilities.retourLigne() ;
+									textFinal += ";" + Utilities.newLine() ;
 							else
-								textFinal += ";" + Utilities.retourLigne() + Utilities.retourLigne(); 
+								textFinal += ";" + Utilities.newLine() + Utilities.newLine(); 
 						else {
 							textFinal += str;
 							oldStr = str ; 

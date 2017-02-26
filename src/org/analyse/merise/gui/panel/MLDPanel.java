@@ -229,7 +229,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 						str = str.replaceAll("</u>", "");
 						
 						if (str.equals(";"))
-							textFinal += Utilities.retourLigne() ; 
+							textFinal += Utilities.newLine() ; 
 						else
 							textFinal += str;
 					}
