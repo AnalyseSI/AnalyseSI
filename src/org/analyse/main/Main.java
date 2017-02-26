@@ -40,9 +40,14 @@ import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 
-public class Main
+public final class Main
 {
-
+	/**
+	 * Don't let anyone instantiate this class.
+	 */
+	private Main() {};
+	
+	
     /** Répertoire personnel */
     public static final String SETTINGS_DIRECTORY = System
             .getProperty("user.home")

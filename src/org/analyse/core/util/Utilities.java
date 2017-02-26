@@ -30,8 +30,14 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Utilities
+public final class Utilities
 {
+	/**
+	 * Don't let anyone instantiate this class.
+	 */
+	private Utilities() {};
+
+
 	static Locale currentLocale ;
 	
 	public static String getRelease () {
@@ -68,7 +74,7 @@ public class Utilities
     }
 
     /**
-     * Rcupre l'extension d'un fichier
+     * Récupère l'extension d'un fichier.
      */
     public static String getExtension(String filename)
     {
@@ -99,7 +105,6 @@ public class Utilities
 
     public static String normaliseString(String str, int upperLowerCase)
     {
-    	
     	// ## evolution UTF-8 ( multi-langue ) 
     	
         /*str = UnicodeUtils.decomposeToBasicLatin(str);
@@ -120,7 +125,6 @@ public class Utilities
         */
 
         return str.replaceAll(" ", "_") ; // Bug #622229
-    	
     }
 
     public static ResourceBundle getResourceBundle ( Locale currentLocale ) {
@@ -164,7 +168,7 @@ public class Utilities
         return formatter.format(messageArguments);
     }
     
-    public static String newLine()
+    public static final String newLine()
     {
         return "\r\n";
     }
