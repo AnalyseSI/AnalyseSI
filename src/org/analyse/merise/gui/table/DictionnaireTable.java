@@ -10,6 +10,9 @@
  *  Date : 2009 janvier 22
  *  @auteur : Bruno Dabo <bruno.dabo@lywoonsoftware.com>
  *  
+ *  Date : 2017 Février 04
+ *  @auteur : Mehdi CHAABANI
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -174,7 +177,7 @@ public class DictionnaireTable extends AbstractTableModel
         addNewLine();
     }
 
-    public void addData(String nom, String type, String taille)
+    public void addData(String nom, String type, String taille, String entity)
     {
         Integer tailleInt;
 
@@ -187,11 +190,11 @@ public class DictionnaireTable extends AbstractTableModel
         if (!contains(Utilities.normaliseString(nom, Constantes.LOWER))) {
             Object[] tab = new Object[6];
             tab[0] = nom;
-            tab[1] = Utilities.normaliseString(nom,Constantes.LOWER);
+            tab[1] = Utilities.normaliseString(nom,Constantes.LOWER) + "_" + entity;
             tab[2] = type;
             tab[3] = tailleInt;
             tab[4] = new Boolean(false);
-            tab[5] = "";
+            tab[5] = entity;
             rows.set(rows.size()-1, tab);
             addNewLine();
         }
@@ -250,9 +253,9 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean contains(String code)
     {
-        for (int i = 0; i < rows.size(); i++)
+        /*for (int i = 0; i < rows.size(); i++)
             if (code.equals((String) (rows.get(i)[1])))
-                return true;
+                return true;*/
         return false;
     }
 

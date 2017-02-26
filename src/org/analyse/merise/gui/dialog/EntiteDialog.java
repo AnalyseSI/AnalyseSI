@@ -5,7 +5,9 @@
  * Copyright (C) 2003 Dreux Loic
  * dreuxl@free.fr
  *
- *
+ * Modifications :
+ * Mehdi CHAABANI - 04/02/2017 
+ * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -554,9 +556,9 @@ public class EntiteDialog extends JDialog
          	    		return ;
                  	}
                  	*/
-                
-            	 data.addData(nomInfo.getText(), (String) typesInfo
-                        .getSelectedItem(), tailleInfo.getText());
+                    
+                data.addData(nomInfo.getText(), (String) typesInfo
+                        .getSelectedItem(), tailleInfo.getText(), nom.getText());
                 update();
                 nomInfo.setText("");
                 tailleInfo.setText("");
