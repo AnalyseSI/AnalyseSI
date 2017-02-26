@@ -290,11 +290,18 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public Object getValueAt(int row, int col)
     {
-        if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
-            return getEntityNameOfProperty(row);
-        } else {
-            return rows.get(row)[col];
+
+        try {  // protéger un peu plus notre code - suite à un bug remonté
+            if (col == ENTITY) {    // afficher l'entité dans laquelle la propriété est utilisée (Bug #712439).
+                return getEntityNameOfProperty(row);
+            } else {
+                return rows.get(row)[col];
+            }
+        } catch (Exception $) {
+            return "**NOT FOUND**" ;
+
         }
+
     }
 
     /**
@@ -329,7 +336,7 @@ public class DictionnaireTable extends AbstractTableModel
     public int getIndex(String ID)
     {
         for (int i = 0; i < rows.size(); i++)
-            if (ID.equals((String) (rows.get(i)[1])))
+            if (ID.equals(rows.get(i)[1]))
                 return i;
         return -1;
     }
@@ -378,7 +385,7 @@ public class DictionnaireTable extends AbstractTableModel
      * @param col
      *            colonne
      */
-    public Class getColumnClass(int col)
+    public Class<? extends Object> getColumnClass(int col)
     {
         return getValueAt(0, col).getClass();
     }
@@ -442,9 +449,7 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean isCellEditable(int row, int col)
     {
-        if (col == ID || col == USE || col == ENTITY)
-            return false;
-        return true;
+        return !(col == ID || col == USE || col == ENTITY);
     }
 
     /**
@@ -519,7 +524,6 @@ public class DictionnaireTable extends AbstractTableModel
         for(Iterator<ZElement> e = meriseModule.getMCDComponent().enumElements(); e.hasNext();) {
             MCDObjet o = (MCDObjet)e.next();
             for (int i = 0; i < o.sizeInformation(); i++) {
-
                 if (rows.get(row)[ID] != null && o.getCodeInformation(i).equals(rows.get(row)[ID])) {
                     return o.getName();
                 }

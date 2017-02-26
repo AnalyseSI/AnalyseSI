@@ -76,20 +76,20 @@ public class ASIMeriseHandler extends ASIModuleHandler
             return;
 
         if ("ENTITE".equalsIgnoreCase(name)) {
-            lastObj = new MCDEntite(mcd, (String) hashtable.get("nom"),
-                    (new Integer((String) hashtable.get("x"))).intValue(),
-                    (new Integer((String) hashtable.get("y"))).intValue());
-            lastObj.setPosition(new Point(new Integer((String) hashtable
-                    .get("x")).intValue(), new Integer((String) hashtable
+            lastObj = new MCDEntite(mcd, hashtable.get("nom"),
+                    (new Integer(hashtable.get("x"))).intValue(),
+                    (new Integer(hashtable.get("y"))).intValue());
+            lastObj.setPosition(new Point(new Integer(hashtable
+                    .get("x")).intValue(), new Integer(hashtable
                     .get("y")).intValue()));
             mcd.addObjet(lastObj);
 
         } else if ("ASSOCIATION".equalsIgnoreCase(name)) {
-            lastObj = new MCDAssociation(mcd, (String) hashtable.get("nom"),
-                    (new Integer((String) hashtable.get("x"))).intValue(),
-                    (new Integer((String) hashtable.get("y"))).intValue());
-            lastObj.setPosition(new Point(new Integer((String) hashtable
-                    .get("x")).intValue(), new Integer((String) hashtable
+            lastObj = new MCDAssociation(mcd, hashtable.get("nom"),
+                    (new Integer(hashtable.get("x"))).intValue(),
+                    (new Integer(hashtable.get("y"))).intValue());
+            lastObj.setPosition(new Point(new Integer(hashtable
+                    .get("x")).intValue(), new Integer(hashtable
                     .get("y")).intValue()));
             mcd.addObjet(lastObj);
         }
@@ -100,27 +100,27 @@ public class ASIMeriseHandler extends ASIModuleHandler
         switch (etape) {
             case DICTIONNAIRE:
                 if ("INFORMATION".equalsIgnoreCase(name)) {
-                    dictionnaireTable.addData((String) hashtable.get("code"),
-                            (String) hashtable.get("nom"), (String) hashtable
-                                    .get("type"), (String) hashtable
-                                    .get("taille"), (String) hashtable
+                    dictionnaireTable.addData(hashtable.get("code"),
+                            hashtable.get("nom"), hashtable
+                                    .get("type"), hashtable
+                                    .get("taille"), hashtable
                                     .get("utilise"));
                 }
                 break;
             case MCD:
                 if ("INFORMATION".equalsIgnoreCase(name) && lastObj != null)
-                    lastObj.addInformation((String) hashtable.get("code"));
+                    lastObj.addInformation(hashtable.get("code"));
 
                 else if ("LIEN".equalsIgnoreCase(name)) {
                     MCDLien lien = new MCDLien();
 
-                    lien.setElement(mcd.getElement((String) hashtable
+                    lien.setElement(mcd.getElement(hashtable
                             .get("elem1")),  Constantes.MCDENTITE1 );
-                    lien.setElement(mcd.getElement((String) hashtable
+                    lien.setElement(mcd.getElement(hashtable
                             .get("elem2")),  Constantes.MCDENTITE2 );
 
-                    lien.setCardMin((String) hashtable.get("cardmin"));
-                    lien.setCardMax((String) hashtable.get("cardmax"));
+                    lien.setCardMin(hashtable.get("cardmin"));
+                    lien.setCardMax(hashtable.get("cardmax"));
 
                     lien.updateLocation();
 

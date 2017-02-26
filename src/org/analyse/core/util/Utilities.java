@@ -35,10 +35,10 @@ public final class Utilities
 	/**
 	 * Don't let anyone instantiate this class.
 	 */
-	private Utilities() {};
-	
-	
-	static Locale currentLocale ;
+	private Utilities() {}
+
+
+    static Locale currentLocale ;
 	
 	public static String getRelease () {
 		return  Constantes.NOM_APPLICATION + " " + Constantes.RELEASE ;
@@ -46,7 +46,6 @@ public final class Utilities
 
     /**
      * Charge un fichier texte interne au programme.
-     * 
      * @param filename
      *            str du fichier texte
      */

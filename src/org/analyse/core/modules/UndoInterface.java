@@ -22,7 +22,7 @@ package org.analyse.core.modules;
 
 public interface UndoInterface
 {
-    public void undo();
+    void undo();
 
-    public void redo();
+    void redo();
 }

@@ -218,7 +218,7 @@ public class HandlerBase implements XmlHandler
      *                Derived methods may throw exceptions.
      */
     public void error(String message, String systemId, int line, int column)
-            throws XmlException, java.lang.Exception
+            throws java.lang.Exception
     {
         throw new XmlException(message, systemId, line, column);
     }

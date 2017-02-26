@@ -40,7 +40,7 @@ public interface XmlHandler
      *                The handler may throw any exception.
      * @see #endDocument
      */
-    public void startDocument() throws java.lang.Exception;
+    void startDocument() throws java.lang.Exception;
 
     /**
      * End the document.
@@ -52,7 +52,7 @@ public interface XmlHandler
      *                The handler may throw any exception.
      * @see #startDocument
      */
-    public void endDocument() throws java.lang.Exception;
+    void endDocument() throws java.lang.Exception;
 
     /**
      * Resolve an External Entity.
@@ -72,7 +72,7 @@ public interface XmlHandler
      * @see #startExternalEntity
      * @see #endExternalEntity
      */
-    public Object resolveEntity(String publicId, String systemId)
+    Object resolveEntity(String publicId, String systemId)
             throws java.lang.Exception;
 
     /**
@@ -92,7 +92,7 @@ public interface XmlHandler
      * @see #endExternalEntity
      * @see #resolveEntity
      */
-    public void startExternalEntity(String systemId) throws java.lang.Exception;
+    void startExternalEntity(String systemId) throws java.lang.Exception;
 
     /**
      * End an external entity.
@@ -110,7 +110,7 @@ public interface XmlHandler
      * @see #startExternalEntity
      * @see #resolveEntity
      */
-    public void endExternalEntity(String systemId) throws java.lang.Exception;
+    void endExternalEntity(String systemId) throws java.lang.Exception;
 
     /**
      * Document type declaration.
@@ -130,7 +130,7 @@ public interface XmlHandler
      * @exception java.lang.Exception
      *                The handler may throw any exception.
      */
-    public void doctypeDecl(String name, String publicId, String systemId)
+    void doctypeDecl(String name, String publicId, String systemId)
             throws java.lang.Exception;
 
     /**
@@ -160,7 +160,7 @@ public interface XmlHandler
      * @see XmlParser#getAttributeType
      * @see XmlParser#getAttributeDefaultValue
      */
-    public void attribute(String aname, String value, boolean isSpecified)
+    void attribute(String aname, String value, boolean isSpecified)
             throws java.lang.Exception;
 
     /**
@@ -179,7 +179,7 @@ public interface XmlHandler
      * @see XmlParser#declaredElements
      * @see XmlParser#getElementContentType
      */
-    public void startElement(String elname) throws java.lang.Exception;
+    void startElement(String elname) throws java.lang.Exception;
 
     /**
      * End an element.
@@ -195,7 +195,7 @@ public interface XmlHandler
      * @see XmlParser#declaredElements
      * @see XmlParser#getElementContentType
      */
-    public void endElement(String elname) throws java.lang.Exception;
+    void endElement(String elname) throws java.lang.Exception;
 
     /**
      * Character data.
@@ -217,7 +217,7 @@ public interface XmlHandler
      * @exception java.lang.Exception
      *                The handler may throw any exception.
      */
-    public void charData(char ch[], int start, int length)
+    void charData(char ch[], int start, int length)
             throws java.lang.Exception;
 
     /**
@@ -240,7 +240,7 @@ public interface XmlHandler
      * @exception java.lang.Exception
      *                The handler may throw any exception.
      */
-    public void ignorableWhitespace(char ch[], int start, int length)
+    void ignorableWhitespace(char ch[], int start, int length)
             throws java.lang.Exception;
 
     /**
@@ -257,7 +257,7 @@ public interface XmlHandler
      * @exception java.lang.Exception
      *                The handler may throw any exception.
      */
-    public void processingInstruction(String target, String data)
+    void processingInstruction(String target, String data)
             throws java.lang.Exception;
 
     /**
@@ -285,7 +285,7 @@ public interface XmlHandler
      *                The handler may throw any exception.
      * @see XmlException
      */
-    public void error(String message, String systemId, int line, int column)
+    void error(String message, String systemId, int line, int column)
             throws java.lang.Exception;
 
 }

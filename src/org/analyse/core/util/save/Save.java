@@ -28,5 +28,5 @@ public interface Save
      * Sauvegarde les données sous forme d'un fichier binaire ou de type texte
      * selon le filtre utilisé.
      */
-    public abstract void save(File file);
+    void save(File file);
 }

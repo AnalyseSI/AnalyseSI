@@ -298,7 +298,7 @@ public class AnalyseSave {
         FileChooserFilter cf;
         chooser.resetChoosableFileFilters();
         for (Iterator<FiltreASI> e = filtres.iterator(); e.hasNext();) {
-            af = (AnalyseFilter) e.next();
+            af = e.next();
             if ( ( mode.equals ( Constantes.OPEN ) && af.canOpen() ) || 
             	 ( mode.equals ( Constantes.SAVE ) && af.canSave() ) )  {
                 cf = new FileChooserFilter(af.getID());
@@ -329,7 +329,7 @@ public class AnalyseSave {
             ext = Utilities.getExtension(fileName);
 
         for (Iterator<FiltreASI> e = filtres.iterator(); e.hasNext();) {
-            af = (AnalyseFilter) e.next();
+            af = e.next();
             if (af.getID().equals(ID) || af.getExtension().equals(ext))
                 return af;
         }

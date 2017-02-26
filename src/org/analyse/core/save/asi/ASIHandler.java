@@ -81,7 +81,7 @@ public class ASIHandler extends HandlerBase
         if (name == null)
             return;
 
-        String lastStartTag = (String) stack.peekFirst();
+        String lastStartTag = stack.peekFirst();
 
         if (name.equalsIgnoreCase(lastStartTag)) {
             if (name.equals("module")) {

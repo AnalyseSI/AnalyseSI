@@ -22,9 +22,9 @@ package org.analyse.core.modules;
 
 public interface ClipboardInterface
 {
-    public void cut();
+    void cut();
 
-    public void copy();
+    void copy();
 
-    public void paste();
+    void paste();
 }

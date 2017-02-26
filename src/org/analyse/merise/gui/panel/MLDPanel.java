@@ -52,7 +52,6 @@ import org.analyse.core.modules.ClipboardInterface;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.GUIUtilities;
 import org.analyse.core.util.Utilities;
-import org.analyse.core.util.save.AnalyseFilter;
 import org.analyse.core.util.save.FileChooserFilter;
 import org.analyse.main.Main;
 import org.analyse.merise.gui.dialog.ConnectionDialog;
@@ -109,7 +108,6 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		chooser.setFileHidingEnabled(true);
 
-		AnalyseFilter af;
 		FileChooserFilter cf;
 		chooser.resetChoosableFileFilters();
 		cf = new FileChooserFilter("MLD");
@@ -167,7 +165,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 					.hasMoreElements();) {
 				str = st.nextToken() ;
 					
-					str = str.replace(";", "<br>") ;
+					str = str.replace(";", "<br/>") ;
 					
 					/*if (keywords.contains(str))
 						textFinal += "<b style=\"color: blue;\">" + str + "</b>";
@@ -176,7 +174,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 					else if (str.equals("(") || str.equals(")"))
 						textFinal += "<b>" + str + "</b>";
 					else if (str.equals(";"))
-						textFinal += ";<br><br>";
+						textFinal += ";<br/><br/>";
 					else    */
 						textFinal += str;
 				
@@ -229,7 +227,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 						str = str.replaceAll("</u>", "");
 						
 						if (str.equals(";"))
-							textFinal += Utilities.newLine() ; 
+							textFinal += Utilities.newLine() ;
 						else
 							textFinal += str;
 					}

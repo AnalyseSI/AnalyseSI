@@ -138,7 +138,7 @@ public class MPDEntite extends ZElement
 
     public String getTableForeignKey(String foreignKey)
     {
-        return (String) foreignKeys.get(foreignKey);
+        return foreignKeys.get(foreignKey);
     }
 
     /** Affichage du MPDEntite */
@@ -190,7 +190,7 @@ public class MPDEntite extends ZElement
         int gw = fm.stringWidth(getName());
 
         for (Iterator<String> e = informations.iterator(); e.hasNext();) {
-            info = (String) e.next();
+            info = e.next();
             gw = fm.stringWidth(info) < gw ? gw : fm.stringWidth(info);
         }
 
@@ -316,7 +316,7 @@ public class MPDEntite extends ZElement
      */
     public String getCodeInformation(int i)
     {
-        return (String) (informations.get(i));
+        return informations.get(i);
     }
 
     public Iterator<String> elementsInformations()

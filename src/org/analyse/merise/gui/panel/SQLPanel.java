@@ -68,8 +68,8 @@ import org.analyse.main.Main;
 import org.analyse.merise.gui.dialog.ConnectionDialog;
 import org.analyse.merise.sql.SQLCommand;
 
-public class SQLPanel extends AnalysePanel implements Observer,
-		ClipboardInterface {
+public class SQLPanel extends AnalysePanel
+	implements Observer, ClipboardInterface {
 	private ActionHandler actionHandler;
 
 	private BasicAction connexion, deconnexion, exec, save;
@@ -220,14 +220,14 @@ public class SQLPanel extends AnalysePanel implements Observer,
 		List<String> types = sqlCommand.getTypes();
 
 		//textFinal = "<html><body style=\"font-family:Geneva,Arial,Helvetica,sans-serif;font-size:11px;\">";
-		textFinal = "<html><body><PRE>";
+		textFinal = "<html><body><pre>";
 		text = sqlCommand.getRequests() ;
 		
 		for (StringTokenizer st = new StringTokenizer(text, " (),<>;", true); st
 					.hasMoreElements();) {
 				str = st.nextToken() ;
 					
-					str = str.replace(",", ",<br>") ;
+					str = str.replace(",", ",<br/>") ;
 					
 					if (keywords.contains(str))
 						textFinal += "<b style=\"color: blue;\">" + str + "</b>";
@@ -236,15 +236,15 @@ public class SQLPanel extends AnalysePanel implements Observer,
 					else if (str.equals("(") || str.equals(")"))
 						textFinal += "<b>" + str + "</b>";
 					else if (str.equals(";"))
-						textFinal += ";<br><br>";
+						textFinal += ";<br/><br/>";
 					else
 						textFinal += str;
 				
 			}
 
-		textFinal += "</PRE></body></html>";
-		textFinal = textFinal.replace("<br><br><b style=\"color: blue;\">CREATE", "<br><b style=\"color: blue;\">CREATE") ;
-		textFinal = textFinal.replace("<b>)</b>;<br><br>", "<b>)</b>;<br>" ) ; 
+		textFinal += "</pre></body></html>";
+		textFinal = textFinal.replace("<br/><br/><b style=\"color: blue;\">CREATE", "<br/><b style=\"color: blue;\">CREATE") ;
+		textFinal = textFinal.replace("<b>)</b>;<br/><br/>", "<b>)</b>;<br/>" ) ;
 		
 		editor.setText(textFinal);
 
@@ -317,7 +317,7 @@ public class SQLPanel extends AnalysePanel implements Observer,
 
 				}
 			} else if (action.equals("SAVESQL")) {
-				oldStr ="";
+				oldStr = "";
 				String fileName = chooseFile();
 				if (fileName == null)
 					return;
@@ -372,7 +372,6 @@ public class SQLPanel extends AnalysePanel implements Observer,
 
     /**
      * Returns the selected SQL syntax.
-     *
      * @return SQL syntax: 'MySQL' or 'PostgreSQL'
      */
     public String getSQLSyntax(){

@@ -350,11 +350,8 @@ public class AnalyseFrame extends JFrame {
 			saveProperties();
 			System.exit(0);
 		}
-		
-		if ( reponse == JOptionPane.CANCEL_OPTION )   // c'est fait exprès ( chemin tortueux à modifier )
-			return false ;
-		else 
-			return true  ;  // Bug #348263
+
+        return reponse != JOptionPane.CANCEL_OPTION;
 
 	}
 

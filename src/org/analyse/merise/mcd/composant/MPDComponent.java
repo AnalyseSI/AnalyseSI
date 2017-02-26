@@ -190,7 +190,7 @@ public class MPDComponent extends ZGraphique {
 
             for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext(); cmp++) {
 
-                info = (String) (e2.next());
+                info = e2.next();
     		info_wid  = info;
 		    
                 if (premierefois) {  // ajout des relations reflexives
@@ -318,7 +318,7 @@ public class MPDComponent extends ZGraphique {
             for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext()
                     && cmp < nbId;) {
 
-                text += Utilities.normaliseString((String) (e2.next()), Constantes.LOWER);  // Bug #622229
+                text += Utilities.normaliseString(e2.next(), Constantes.LOWER);  // Bug #622229
                 cmp++;
                 if (cmp < nbId) {
                     text += ", ";
@@ -381,7 +381,7 @@ public class MPDComponent extends ZGraphique {
             if (!ent.foreignKeysIsEmpty()) {
                 for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext();) {
 
-                    info = (String) (e2.next());
+                    info = e2.next();
 
                     if (ent.getTableForeignKey(info) != null) {
                     		

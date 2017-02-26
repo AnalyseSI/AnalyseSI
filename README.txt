@@ -8,6 +8,7 @@ Les sources sont sur Github
 https://github.com/AnalyseSI/AnalyseSI
 
 ----------------------
-RELEASE : 0.76 ( Bundaberg )
-Date : Juillet 2014
+RELEASE : 0.80 ( Cairns )
+Date : Septembre 2014
 ----------------------
+Mot clé : multi-langue 

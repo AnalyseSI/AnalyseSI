@@ -42,10 +42,10 @@ public final class GUIUtilities
 	/**
 	 * Don't let anyone instantiate this class.
 	 */
-	private GUIUtilities() {};
+	private GUIUtilities() {}
 
 
-	// Hashtable contenant les images déjà chargées
+    // Hashtable contenant les images déjà chargées
 	// Permet de ne pas recharger les images à chaque
 	// fois dans un soucis de performance.
     private static Map<String, ImageIcon> hashtable = new HashMap<String, ImageIcon>();
@@ -152,7 +152,7 @@ public final class GUIUtilities
 	public static Font openFont(String name)
 	{
 		if(fonts.containsKey(name))
-			return (Font) fonts.get(name);
+			return fonts.get(name);
 		
 		Font font = null;
 		InputStream is = ClassLoader.getSystemResourceAsStream("org/analyse/core/gui/fonts/" + name);

@@ -56,6 +56,6 @@ public class NavigationActionFactory implements ActionListener
     
     public void actionPerformed(ActionEvent e)
     {
-        analyseFrame.setPanel((AnalysePanel)hashtable.get(e.getActionCommand()));
+        analyseFrame.setPanel(hashtable.get(e.getActionCommand()));
     }
 }

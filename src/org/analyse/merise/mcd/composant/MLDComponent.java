@@ -134,7 +134,7 @@ public class MLDComponent extends ZGraphique {
             text = Utilities.normaliseString( ent.getName(), Constantes.LOWER) + " (";
             
             for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext() ; ) {            	
-                info = (String) (e2.next());                
+                info = e2.next();
                 info = Utilities.normaliseString(info, Constantes.LOWER);  
                 if (ent.identifiants.containsKey(info) )
                 	text += "<u>" + info +"</u>";

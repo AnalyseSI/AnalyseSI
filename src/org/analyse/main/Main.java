@@ -45,9 +45,9 @@ public final class Main
 	/**
 	 * Don't let anyone instantiate this class.
 	 */
-	private Main() {};
-	
-	
+	private Main() {}
+
+
     /** Répertoire personnel */
     public static final String SETTINGS_DIRECTORY = System
             .getProperty("user.home")
@@ -140,6 +140,6 @@ public final class Main
 
     public static AnalyseModule getModule(String id)
     {
-        return (AnalyseModule) modules.get(id);
+        return modules.get(id);
     }
 }

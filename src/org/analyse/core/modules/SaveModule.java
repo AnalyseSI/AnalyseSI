@@ -29,5 +29,5 @@ public interface SaveModule
      * Sauvegarde les données du module sous forme d'un fichier binaire ou de
      * type texte selon le filtre utilisé.
      */
-    public abstract void save(PrintStream out) throws IOException;
+    void save(PrintStream out) throws IOException;
 }
