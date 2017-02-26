@@ -377,7 +377,7 @@ public class EntiteDialog extends JDialog
         
         for (Iterator<String> e = mcdobject.elementsInformations(); e
                 .hasNext();) {
-            code = (String) e.next();
+            code = e.next();
             listDroite.addElement(code, (String) data.getValue(code,
                     DictionnaireTable.NAME));
         }
@@ -398,7 +398,7 @@ public class EntiteDialog extends JDialog
             
         }
         for (Iterator<String> e = keys.iterator(); e.hasNext();) {
-            key = (String) e.next();
+            key = e.next();
             listDroite.addElement(key, (String) data.getValue(key,
                     DictionnaireTable.NAME));
             listGauche.removeElement(key);
@@ -417,7 +417,7 @@ public class EntiteDialog extends JDialog
                 keys.add(listDroite.getKey(i));
         }
         for (Iterator<String> e = keys.iterator(); e.hasNext();) {
-            key = (String) e.next();
+            key = e.next();
             listGauche.addElement(key, (String) data.getValue(key,
                     DictionnaireTable.NAME));
             listDroite.removeElement(key);

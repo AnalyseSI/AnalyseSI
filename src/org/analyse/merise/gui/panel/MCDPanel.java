@@ -476,10 +476,10 @@ public class MCDPanel extends AnalysePanel
             	deleteObjects();
             } 
             if (action.equals(Constantes.MOD_OBJET)) {
-                entiteDialog.load((MCDObjet) objet);
+                entiteDialog.load(objet);
             } 
             if (action.equals(Constantes.MOD_LIEN)) {
-                lienDialog.load((MCDLien) lien);
+                lienDialog.load(lien);
             } 
             if (action.equals(Constantes.VERIF_MCD)) {
                 mcdComponent.isCorrect(Constantes.SHOW_ALL);

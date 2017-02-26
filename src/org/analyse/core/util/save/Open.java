@@ -28,5 +28,5 @@ public interface Open
      * Charge les données sous forme d'un fichier binaire ou de type texte
      * selon le filtre utilisé.
      */
-    public abstract void open(File file);
+    void open(File file);
 }

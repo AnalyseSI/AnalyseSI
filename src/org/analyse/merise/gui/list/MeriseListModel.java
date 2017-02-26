@@ -97,7 +97,7 @@ public class MeriseListModel extends AbstractListModel
 
     public String getKey(int index)
     {
-        return (String) listKey.get(index);
+        return listKey.get(index);
     }
 
     public Hashtable<String,String>  getListLabel() {

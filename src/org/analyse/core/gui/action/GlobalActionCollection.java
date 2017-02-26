@@ -185,7 +185,7 @@ public class GlobalActionCollection implements Observer {
 	 *            identifiant de l'action
 	 */
 	public BasicAction getAction(String ID) {
-		return (BasicAction) (actionCollection.get(ID));
+		return actionCollection.get(ID);
 	}
 
 	/**

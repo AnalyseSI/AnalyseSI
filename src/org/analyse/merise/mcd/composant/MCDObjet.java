@@ -196,7 +196,7 @@ public abstract class MCDObjet extends ZElement implements Observer
     public void clearInformations()
     {
         for (Iterator<String> e = informations.iterator(); e.hasNext();) {
-            data.setUse((String) e.next(), false);
+            data.setUse(e.next(), false);
         }
         informations.clear();
         notifyZElement();
@@ -304,7 +304,7 @@ public abstract class MCDObjet extends ZElement implements Observer
 
         if (arg.getType() == ArgObserverTable.RENAME) {
             for (int i = 0; i < informations.size(); i++)
-                if (((String) informations.get(i)).equals(arg
+                if (informations.get(i).equals(arg
                         .getOldName()))
                     informations.set(i, arg.getNewName());
         } else if (arg.getType() == ArgObserverTable.DELETE) {

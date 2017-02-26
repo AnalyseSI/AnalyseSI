@@ -216,7 +216,7 @@ public class ZGraphique extends JComponent implements MouseListener,
     {
         Iterator<ZElement> e = elements.iterator();
         while (e.hasNext())
-            addElement((ZElement) e.next());
+            addElement(e.next());
     }
 
     /**
@@ -229,7 +229,7 @@ public class ZGraphique extends JComponent implements MouseListener,
         Iterator<ZLien> e = zliens.iterator();
         List<ZLien> supp = new ArrayList<ZLien>();
         while (e.hasNext()) {
-            ZLien l = (ZLien) (e.next());
+            ZLien l = e.next();
             if (l.getElement(Constantes.MCDENTITE1).equals(element)
                     || l.getElement(Constantes.MCDENTITE2).equals(element))
                 supp.add(l);
@@ -259,7 +259,7 @@ public class ZGraphique extends JComponent implements MouseListener,
     {
         Iterator<ZLien> e = liens.iterator();
         while (e.hasNext())
-            addLien((ZLien) e.next());
+            addLien(e.next());
     }
 
     /**
@@ -278,7 +278,7 @@ public class ZGraphique extends JComponent implements MouseListener,
     public void removeLiens(List<ZLien> supp)
     {
         for (Iterator<ZLien> e = supp.iterator(); e.hasNext();)
-            removeLien((ZLien) e.next());
+            removeLien(e.next());
     }
 
     /**
@@ -289,7 +289,7 @@ public class ZGraphique extends JComponent implements MouseListener,
      */
     public ZLien getLien(int i)
     {
-        return ((ZLien) (zliens.get(i)));
+        return zliens.get(i);
     }
 
     /**
@@ -316,7 +316,7 @@ public class ZGraphique extends JComponent implements MouseListener,
      */
     public ZElement getElement(int i)
     {
-        return ((ZElement) (zelements.get(i)));
+        return zelements.get(i);
     }
 
     /**
@@ -418,7 +418,7 @@ public class ZGraphique extends JComponent implements MouseListener,
 
         Iterator<ZLien> e = zliens.iterator();
         while (e.hasNext()) {
-            lien = (ZLien) e.next();
+            lien = e.next();
             if (lien.getElement(Constantes.MCDENTITE1) == elem1
                     && lien.getElement(Constantes.MCDENTITE2) == elem2) {
                 return false;
@@ -431,7 +431,7 @@ public class ZGraphique extends JComponent implements MouseListener,
     {
         String s = "{";
         for (Iterator<ZLien> e = elementsZLiens(); e.hasNext();) {
-            ZLien lien = (ZLien) e.next();
+            ZLien lien = e.next();
             s += "\n" + lien;
         }
         return s + "\n}";
@@ -457,11 +457,11 @@ public class ZGraphique extends JComponent implements MouseListener,
 
         Iterator<ZElement> e = zelements.iterator();
         while (e.hasNext())
-            ((ZElement) (e.next())).paint(g);
+            e.next().paint(g);
         
         Iterator<ZLien> e1 = zliens.iterator();
         while (e1.hasNext())
-            ((ZLien) (e1.next())).paint(g);
+            e1.next().paint(g);
 
         for (ZElement elem : selectionCourante)
             elem.paintFocus(g);

@@ -27,5 +27,5 @@ public interface OpenModule
     /**
      * Charge les données du module à partir d'une chaine de caractère.
      */
-    public abstract void open(String data) throws IOException;
+    void open(String data) throws IOException;
 }

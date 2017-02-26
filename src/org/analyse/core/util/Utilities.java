@@ -35,10 +35,10 @@ public final class Utilities
 	/**
 	 * Don't let anyone instantiate this class.
 	 */
-	private Utilities() {};
+	private Utilities() {}
 
 
-	static Locale currentLocale ;
+    static Locale currentLocale ;
 	
 	public static String getRelease () {
 		return  Constantes.NOM_APPLICATION + " " + Constantes.RELEASE ;

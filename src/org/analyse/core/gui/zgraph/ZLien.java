@@ -203,7 +203,7 @@ public abstract class ZLien
         l3 = Math.sqrt((centrex1 - centrex2) * (centrex1 - centrex2)
                 + (centrey1 - centrey2) * (centrey1 - centrey2));
 
-        theta = Math.acos((double) (l1 / l3));
+        theta = Math.acos(l1 / l3);
 
         if (centrey1 > centrey2)
             theta = 2 * Math.PI - theta;
@@ -290,13 +290,11 @@ public abstract class ZLien
         h = a / 2 - (b * b) / (2 * a) + c * c / (2 * a);
 
         g = Math.sqrt(c * c - h * h);
-        if (g < 10
+        return g < 10
                 && (mousex > x1 - 10 && mousex < x2 + 10 || mousex < x1 + 10
-                        && mousex > x2 - 10)
+                && mousex > x2 - 10)
                 && (mousey > y1 - 10 && mousey < y2 + 10 || mousey < y1 + 10
-                        && mousey > y2 - 10))
-            return true;
-        return false;
+                && mousey > y2 - 10);
     }
 
     public void notifyZLien()

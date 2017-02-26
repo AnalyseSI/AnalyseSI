@@ -336,7 +336,7 @@ public class DictionnaireTable extends AbstractTableModel
     public int getIndex(String ID)
     {
         for (int i = 0; i < rows.size(); i++)
-            if (ID.equals((String) (rows.get(i)[1])))
+            if (ID.equals(rows.get(i)[1]))
                 return i;
         return -1;
     }
@@ -449,9 +449,7 @@ public class DictionnaireTable extends AbstractTableModel
      */
     public boolean isCellEditable(int row, int col)
     {
-        if (col == ID || col == USE || col == ENTITY)
-            return false;
-        return true;
+        return !(col == ID || col == USE || col == ENTITY);
     }
 
     /**

@@ -22,5 +22,5 @@ package org.analyse.core.util;
 
 public interface Memento
 {
-    public void restore();
+    void restore();
 }

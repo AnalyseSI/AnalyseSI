@@ -67,9 +67,9 @@ public class SQLCommand {
 	private List<String> typesWithoutSize;
 
     // Syntaxes SQL disponibles
-    public static enum SQLsyntax { MySQL, PostgreSQL, OracleDB};
+    public enum SQLsyntax { MySQL, PostgreSQL, OracleDB}
 
-	public SQLCommand() {
+    public SQLCommand() {
 		observableSQL = new ObservableSQL();
 
 		state = DECONNECTED;
@@ -266,7 +266,7 @@ public class SQLCommand {
 		if (!deleteTable) {
 			try {
 				for (Iterator<String> e = requests.iterator(); e.hasNext();) {
-					stmt.executeUpdate((String) e.next());
+					stmt.executeUpdate(e.next());
 				}
 			} catch (SQLException e) {
 				//e.printStackTrace();
@@ -278,13 +278,13 @@ public class SQLCommand {
 			}
 		} else {
 			Iterator<String> e = requests.iterator();
-			line = (String) e.next();
+			line = e.next();
 
 			while (e.hasNext()) {
 				try {
 					stmt.executeUpdate(line);
 
-					line = (String) e.next();
+					line = e.next();
 				} catch (SQLException e2) {
 					//e2.printStackTrace();
 

@@ -1,6 +1,12 @@
 *.iml
+.idea
+.settings
+.project
+.classpath
+.project
 /build
 /bin
 /doc
-.idea
-.settings
+/classes
+/out
+
