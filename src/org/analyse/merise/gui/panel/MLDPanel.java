@@ -31,7 +31,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,12 +40,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
 
 import org.analyse.core.gui.action.BasicAction;
 import org.analyse.core.gui.menu.ClipboardPopupMenu;
@@ -54,14 +51,12 @@ import org.analyse.core.modules.AnalysePanel;
 import org.analyse.core.modules.ClipboardInterface;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.GUIUtilities;
-import org.analyse.core.util.SwingWorker;
 import org.analyse.core.util.Utilities;
 import org.analyse.core.util.save.AnalyseFilter;
 import org.analyse.core.util.save.FileChooserFilter;
 import org.analyse.main.Main;
 import org.analyse.merise.gui.dialog.ConnectionDialog;
 import org.analyse.merise.mcd.composant.MLDCommand;
-import org.analyse.merise.sql.SQLCommand;
 
 public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterface{
 	private ActionHandler actionHandler;

@@ -50,7 +50,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import org.analyse.core.gui.action.BasicAction;
 import org.analyse.core.util.Constantes;

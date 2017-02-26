@@ -35,7 +35,6 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import org.analyse.core.gui.AnalyseFrame;
 import org.analyse.core.gui.HtmlWindow;
 
 public class GUIUtilities

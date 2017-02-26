@@ -23,17 +23,11 @@
 
 package org.analyse.merise.mcd.composant;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.StringTokenizer;
 
 
 public class MLDCommand {

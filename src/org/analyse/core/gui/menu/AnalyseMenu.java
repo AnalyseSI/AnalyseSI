@@ -34,8 +34,6 @@ import javax.swing.JMenuItem;
 import javax.swing.event.MouseInputAdapter;
 
 import org.analyse.core.gui.action.MainActionListener;
-import org.analyse.core.util.Constantes;
-import org.analyse.core.util.Utilities;
 import org.analyse.main.Main;
 
 public class AnalyseMenu
