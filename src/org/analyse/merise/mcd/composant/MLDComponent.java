@@ -32,13 +32,8 @@ import org.analyse.core.gui.zgraph.ZElement;
 import org.analyse.core.gui.zgraph.ZGraphique;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.Utilities;
-import org.analyse.merise.gui.table.DictionnaireTable;
 
 public class MLDComponent extends ZGraphique {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -464810270266166396L;
 	private double width;
     protected Hashtable<String, String> foreignKeys;
