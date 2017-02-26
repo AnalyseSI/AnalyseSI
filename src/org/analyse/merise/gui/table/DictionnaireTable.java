@@ -385,7 +385,7 @@ public class DictionnaireTable extends AbstractTableModel
      * @param col
      *            colonne
      */
-    public Class getColumnClass(int col)
+    public Class<? extends Object> getColumnClass(int col)
     {
         return getValueAt(0, col).getClass();
     }
@@ -526,7 +526,6 @@ public class DictionnaireTable extends AbstractTableModel
         for(Iterator<ZElement> e = meriseModule.getMCDComponent().enumElements(); e.hasNext();) {
             MCDObjet o = (MCDObjet)e.next();
             for (int i = 0; i < o.sizeInformation(); i++) {
-
                 if (rows.get(row)[ID] != null && o.getCodeInformation(i).equals(rows.get(row)[ID])) {
                     return o.getName();
                 }

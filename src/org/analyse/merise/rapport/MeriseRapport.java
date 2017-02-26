@@ -113,32 +113,38 @@ public class MeriseRapport
         out.println("<h3>Dictionnaire des informations</h3>");
 
         out.println("<table class=\"cadre\">");
-
+        
+        out.println("<thead>");
         out.println("<tr>\n<td><B>Nom</B></td>");
         out.println("<td><B>Code</B></td>");
         out.println("<td><B>Type</B></td>");
         out.println("<td><B>Taille</B></td>\n</tr>");
+        out.println("</thead>");
+        
+        if(dico.getRowCount() > 0) {
+        	out.println("</tbody>");
+        	for (int i = 0; i < dico.getRowCount() - 1; i++) {
+        		out.println("<tr>");
 
-        for (int i = 0; i < dico.getRowCount() - 1; i++) {
-            out.println("<tr>");
+        		out.print("<td>");
+        		out.print(dico.getValue(dico.getID(i), DictionnaireTable.NAME));
+        		out.print("</td>");
 
-            out.print("<td>");
-            out.print(dico.getValue(dico.getID(i), DictionnaireTable.NAME));
-            out.print("</td>");
+        		out.print("<td>");
+        		out.print(dico.getID(i));
+        		out.println("</td>");
 
-            out.print("<td>");
-            out.print(dico.getID(i));
-            out.println("</td>");
+        		out.print("<td>");
+        		out.print(dico.getValue(dico.getID(i), DictionnaireTable.TYPE));
+        		out.print("</td>");
 
-            out.print("<td>");
-            out.print(dico.getValue(dico.getID(i), DictionnaireTable.TYPE));
-            out.print("</td>");
+        		out.print("<td>");
+        		out.print(dico.getValue(dico.getID(i), DictionnaireTable.SIZE));
+        		out.print("</td>");
 
-            out.print("<td>");
-            out.print(dico.getValue(dico.getID(i), DictionnaireTable.SIZE));
-            out.print("</td>");
-
-            out.println("</tr>");
+        		out.println("</tr>");
+        	}
+        	out.println("</tbody>");
         }
 
         out.println("</table>");
@@ -183,7 +189,7 @@ public class MeriseRapport
         outputStream.close();
         writer.dispose();
 
-        out.println("<br><br>");
+        out.println("<br/><br/>");
 		out.println("<h3>Modèle Conceptuel de données</h3>");
 		out.println("<img border=\"0\" src=\"MCD.png\"");
         
@@ -212,14 +218,14 @@ public class MeriseRapport
         outputStream.close();
         writer.dispose();
 
-        out.println("<br><br>");
+        out.println("<br/><br/>");
 		out.println("<h3>Modèle physique de données</h3>");
 		out.println("<img border=\"0\" src=\"Mpd.png\"");
     }
     
     private void saveSQL(PrintStream out) throws IOException
     {
-        out.println("<br><br>");
+        out.println("<br/><br/>");
         out.println("<h3>Script SQL</h3>");
         
         String name, str, text, textFinal, requete;
@@ -240,7 +246,7 @@ public class MeriseRapport
             else if (str.equals("(") || str.equals(")"))
                 out.println("<b>" + str + "</b>");
             else if (str.equals(";"))
-                out.println(";<br><br>");
+                out.println(";<br/><br/>");
             else
                 out.println(str);
         }
@@ -248,6 +254,6 @@ public class MeriseRapport
 
     public void saveInNewDirectory(String directory)
     {
-
+    	// TODO ?
     }
 }

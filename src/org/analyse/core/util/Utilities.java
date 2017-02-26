@@ -40,7 +40,6 @@ public class Utilities
 
     /**
      * Charge un fichier texte interne au programme.
-     * 
      * @param filename
      *            str du fichier texte
      */
@@ -165,7 +164,7 @@ public class Utilities
         return formatter.format(messageArguments);
     }
     
-    public static String retourLigne()
+    public static String newLine()
     {
         return "\r\n";
     }

@@ -23,17 +23,11 @@
 
 package org.analyse.merise.mcd.composant;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.StringTokenizer;
 
 
 public class MLDCommand {
@@ -51,7 +45,7 @@ public class MLDCommand {
 
 	/**
 	 * Ajoute un observer qui permet d'avertir les autres classes d'un ajout ou
-	 * d'une suppression d'une requete.
+	 * d'une suppression d'une requête.
 	 */
 	public void addObserver(Observer obs) {
 		observableMDL.addObserver(obs);
@@ -85,11 +79,9 @@ public class MLDCommand {
 		observableMDL.notifyObservers();
 	}
 
-
 	/**
 	 * Permet de récupérer l'erreur lors de la connection ou de l'éxécution des requetes SQL.
 	 */
-	
 	public String getError() {
 		return error;
 	}
@@ -105,7 +97,6 @@ public class MLDCommand {
 	/**
 	 * Retourne l'état de la connection.
 	 */
-	
 	public int getState() {
 		return state;
 	}
