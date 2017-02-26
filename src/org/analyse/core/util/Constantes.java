@@ -33,7 +33,7 @@ public class Constantes {
     public static final String NOM_APPLICATION = "AnalyseSI";
 
     /** Version actuel de Analyse */
-    public static final String RELEASE = "v0.76 - Bundaberg";
+    public static final String RELEASE = "v0.80 - Cairns";
 
     public static final String FILE_EXTENSION = "asi" ;
     public static final String ASI_ENCODING = "UTF-8" ;   
