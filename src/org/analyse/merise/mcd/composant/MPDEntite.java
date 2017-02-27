@@ -49,8 +49,12 @@ public class MPDEntite extends ZElement
     /** Nombre d'information sans les identifiants */
     private int nbInformation = 0;
     
-    private boolean foreignKeyCanBeNull  ; 
-    
+    private boolean foreignKeyCanBeNull  ;
+
+    public Hashtable<String, String> getForeignKeys() {
+        return foreignKeys;
+    }
+
     /** Nombre de MCDEntite */
     private static int nbMPDEntite;
 
