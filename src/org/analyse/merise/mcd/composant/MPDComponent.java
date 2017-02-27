@@ -122,7 +122,7 @@ public class MPDComponent extends ZGraphique {
      * Construit les requêtes SQL.
      */
     public void buildSQL(DictionnaireTable data, SQLCommand sql) {
-        String text, info, info_wid ; //info_wid: permet le traitement des attributs non typés comme clefs
+        String text, info;
         MPDEntite ent;
         int cmp, nbId;
 
@@ -191,8 +191,7 @@ public class MPDComponent extends ZGraphique {
             for (Iterator<String> e2 = ent.elementsInformations(); e2.hasNext(); cmp++) {
 
                 info = e2.next();
-    		info_wid  = info;
-		    
+
                 if (premierefois) {  // ajout des relations reflexives
                     premierefois = false;
                     defautType = (String) data.getValue(info, DictionnaireTable.TYPE);
@@ -203,8 +202,10 @@ public class MPDComponent extends ZGraphique {
                     }
                 }
 
+                String w_info = (ent.getForeignKeys().containsKey(info)) ? info.substring(info.indexOf("_")+1) : info ;
+
                 try {
-                    type = (String) data.getValue(info, DictionnaireTable.TYPE);
+                    type = (String) data.getValue(w_info, DictionnaireTable.TYPE);
                 } catch (Exception ex) {
                     type = defautType;
                 }
@@ -245,32 +246,36 @@ public class MPDComponent extends ZGraphique {
                 	 */
                 	
                     if ("INT_AUTO_INCREMENT".equals(type)) {
-			info = Utilities.normaliseString(info, Constantes.LOWER);
+			            info = Utilities.normaliseString(info, Constantes.LOWER);
                         type = Constantes.INT_AUTO_INCREMENT ;  // Bug #567501
                     }
                     if ("BIGINT_AUTO_INCREMENT".equals(type)) {
-			info = Utilities.normaliseString(info, Constantes.LOWER);
+			            info = Utilities.normaliseString(info, Constantes.LOWER);
                         type = Constantes.BIGINT_AUTO_INCREMENT;  // Bug #567501
                     }
                 } else {
-			info = String.valueOf(data.getValue(info_wid, DictionnaireTable.NAME));
+                    //w_info = (ent.getForeignKeys().containsKey(info)) ? info.substring(info.indexOf("_")+1) : info ;
+                    //info = String.valueOf(data.getValue(info, DictionnaireTable.NAME));
                     if ("BIGINT_AUTO_INCREMENT".equals(type)) {
-                        info = Utilities.normaliseString(info_wid, Constantes.LOWER);
-			type = "BIGINT";
+                        info = Utilities.normaliseString(info, Constantes.LOWER);
+			            type = "BIGINT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
                     if ("INT_AUTO_INCREMENT".equals(type)) {
-                        info = Utilities.normaliseString(info_wid, Constantes.LOWER);
-			type = "INT";
+                        info = Utilities.normaliseString(info, Constantes.LOWER);
+			            type = "INT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
+
                 }
                 
                 //info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
                 text += info + " " + type;
 
                 try {
-                    if (((Integer) data.getValue(info, DictionnaireTable.SIZE)).intValue() != 0
-                            && !sql.getTypesWithoutSize().contains(data.getValue(info, DictionnaireTable.TYPE))) {
-                        text += "(" + data.getValue(info, DictionnaireTable.SIZE) + ")";
+                    w_info = (ent.getForeignKeys().containsKey(info)) ? info.substring(info.indexOf("_")+1) : info ;
+
+                    if (((Integer) data.getValue(w_info, DictionnaireTable.SIZE)).intValue() != 0
+                            && !sql.getTypesWithoutSize().contains(data.getValue(w_info, DictionnaireTable.TYPE))) {
+                        text += "(" + data.getValue(w_info, DictionnaireTable.SIZE) + ")";
                     }
                 } catch (Exception ex) {
 
@@ -373,7 +378,7 @@ public class MPDComponent extends ZGraphique {
 
 
         info = "";
-	info_wid ="";
+
         for (Iterator<ZElement> e = enumElements(); e.hasNext();) {
            
             ent = (MPDEntite) (e.next());
