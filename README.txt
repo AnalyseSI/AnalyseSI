@@ -9,6 +9,11 @@ https://github.com/AnalyseSI/AnalyseSI
 
 ----------------------
 RELEASE : 0.80 ( Cairns )
-Date : Septembre 2014
+Date : Mars 2017
 ----------------------
-Mot clé : multi-langue 
+Liste des corrections apportées
+
+- prise en compte de la syntaxe de ORACLE - Merci bbouffet
+- les attributs peuvent avoir le même nom dans plusiers entités différentes - Merci Mehdi Chaabani (jarikov)
+- lifting et revue sommaire de code - Merci Nicola Spanti (RyDroid)
+- corrections de bugs et robustesse

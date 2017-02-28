@@ -128,7 +128,7 @@ public class HtmlWindow extends JWindow implements ActionListener
     
     /**
      * Cette méthode ferme automatiquement le popup au bout
-     * de 2 secondes
+     * de 3 secondes
      */
     public void closeAfter2sec()
     {
