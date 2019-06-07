@@ -98,6 +98,7 @@ public class MPDLien extends ZLien {
 								   .abs(y2 - y1) * 15)
 		       / lt);
 
+
 		p4 = new Point2D.Double(x, y);
 
 		//On trace la ligne entre les 2 elements du MPD
@@ -157,23 +158,27 @@ public class MPDLien extends ZLien {
 	/**
 	 * Evite d'avoir des lignes de travers.
 	 */
+        //Ajout de condition sur y2 pour que la base de la flèche soit sur MCDENTITE2 et qu'elle ne soit pas au-dessus
+        //MICHEL Arthur, ROUX Constant
 	public void updateLocation() {
 		super.updateLocation();
-
-		if (getElement(  Constantes.MCDENTITE2 ).getX() > getElement(  Constantes.MCDENTITE1 ).getX()
-				+ getElement(  Constantes.MCDENTITE1 ).getWidth()
-				|| getElement( Constantes.MCDENTITE2 ).getX() + getElement( Constantes.MCDENTITE2 ).getWidth() < getElement( Constantes.MCDENTITE1 ).getX()) {
-			if (getElement( Constantes.MCDENTITE1 ).getY() < getElement( Constantes.MCDENTITE1 ).getY()
-					+ getElement( Constantes.MCDENTITE1 ).getHeight()
+		if (getElement( Constantes.MCDENTITE2 ).getX() > getElement( Constantes.MCDENTITE1 ).getX()
+				+ getElement( Constantes.MCDENTITE1 ).getHeight()
+				|| getElement( Constantes.MCDENTITE2 ).getX() + getElement( Constantes.MCDENTITE2 ).getWidth() < getElement(Constantes.MCDENTITE1 ).getX()) {
+			if (getElement( Constantes.MCDENTITE2 ).getY() < getElement( Constantes.MCDENTITE1 ).getY()
+					+ getElement( Constantes.MCDENTITE1 ).getWidth()
 					&& getElement( Constantes.MCDENTITE1 ).getY() < getElement( Constantes.MCDENTITE2 ).getY()
 							+ getElement( Constantes.MCDENTITE2 ).getHeight()) {
-				if (y2 > getElement(  Constantes.MCDENTITE1 ).getY() + getElement( Constantes.MCDENTITE1 ).getHeight())
-					y2 = getElement( Constantes.MCDENTITE1 ).getY() + getElement( Constantes.MCDENTITE1 ).getHeight();
+				if (y2 > getElement( Constantes.MCDENTITE1 ).getY() + getElement( Constantes.MCDENTITE1 ).getHeight())
+					y2 = getElement( Constantes.MCDENTITE1 ).getY()+ getElement( Constantes.MCDENTITE1 ).getHeight();
 				else if (y2 < getElement( Constantes.MCDENTITE1 ).getY())
 					y2 = getElement( Constantes.MCDENTITE1 ).getY();
 				y1 = y2;
+                                if(y2 < getElement( Constantes.MCDENTITE2 ).getY()){
+                                    y2 = getElement( Constantes.MCDENTITE2 ).getY() + (getElement( Constantes.MCDENTITE2 ).getHeight()/2);
+                                }
 			}
-		} else if (getElement( Constantes.MCDENTITE2 ).getY() > getElement( Constantes.MCDENTITE1 ).getY()
+                } else if (getElement( Constantes.MCDENTITE2 ).getY() > getElement( Constantes.MCDENTITE1 ).getY()
 				+ getElement( Constantes.MCDENTITE1 ).getWidth()
 				|| getElement( Constantes.MCDENTITE2 ).getY() + getElement( Constantes.MCDENTITE2 ).getHeight() < getElement(Constantes.MCDENTITE1 ).getY()) {
 			if (getElement( Constantes.MCDENTITE2 ).getX() < getElement( Constantes.MCDENTITE1 ).getX()
@@ -181,14 +186,14 @@ public class MPDLien extends ZLien {
 					&& getElement( Constantes.MCDENTITE1 ).getX() < getElement( Constantes.MCDENTITE2 ).getX()
 							+ getElement( Constantes.MCDENTITE2 ).getWidth()) {
 				if (x2 > getElement( Constantes.MCDENTITE1 ).getX() + getElement( Constantes.MCDENTITE1 ).getWidth())
-					x2 = getElement( Constantes.MCDENTITE1 ).getY() + getElement( Constantes.MCDENTITE1 ).getWidth();
+					x2 = getElement( Constantes.MCDENTITE1 ).getX() + getElement( Constantes.MCDENTITE1 ).getWidth();
 				else if (x2 < getElement( Constantes.MCDENTITE1 ).getX())
 					x2 = getElement( Constantes.MCDENTITE1 ).getX();
 				x1 = x2;
 			}
 		}
 	}
-
+      
 	public String toString() {
 		return "MCDLien, " + info();
 	}
