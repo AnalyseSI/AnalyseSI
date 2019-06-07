@@ -29,6 +29,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileOutputStream;
@@ -63,6 +65,7 @@ import org.analyse.core.util.GUIUtilities;
 import org.analyse.core.util.SwingWorker;
 import org.analyse.core.util.Utilities;
 import org.analyse.core.util.save.AnalyseFilter;
+import org.analyse.core.util.save.AnalyseSave;
 import org.analyse.core.util.save.FileChooserFilter;
 import org.analyse.main.Main;
 import org.analyse.merise.gui.dialog.ConnectionDialog;
@@ -88,7 +91,7 @@ public class SQLPanel extends AnalysePanel
 
 	private JFileChooser chooser;
 
-    private JComboBox jrbSQLSyntax;
+        private JComboBox jrbSQLSyntax;
 
 	private Map requestsSelected;
 
@@ -135,6 +138,9 @@ public class SQLPanel extends AnalysePanel
 		this.add(BorderLayout.NORTH, toolbar);
 		this.add(BorderLayout.CENTER, new JScrollPane(editor));
 		this.add(BorderLayout.SOUTH, statePanel);
+                
+                editor.setFocusable(true);
+                editor.addKeyListener(new KeyHandler());
 	}
 
 	private void initToolbar() {
@@ -176,6 +182,7 @@ public class SQLPanel extends AnalysePanel
         toolbar.add(new JToolBar.Separator());
         toolbar.add(new JLabel(Utilities.getLangueMessage("sql_syntax")));
         toolbar.add(jrbSQLSyntax);
+        this.jrbSQLSyntax.requestFocus(true);
 	}
 
 	private void initAction() {
@@ -288,6 +295,7 @@ public class SQLPanel extends AnalysePanel
 		}
 	}
 
+
 	private class ActionHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String action = e.getActionCommand();
@@ -377,4 +385,21 @@ public class SQLPanel extends AnalysePanel
     public String getSQLSyntax(){
         return jrbSQLSyntax.getSelectedItem().toString();
     }
+    
+    private class KeyHandler extends KeyAdapter
+        {
+            int lasttyped;
+            public void keyPressed(KeyEvent ke){
+                if((int)ke.getKeyCode() == 17){
+                    lasttyped = 17;
+                }
+                if((int)ke.getKeyCode() == 83 && lasttyped == 17){
+                    AnalyseSave s = Main.analyseFrame.getAnalyseSave();
+                    s.save();
+                }
+                if((int)ke.getKeyCode() != 17){
+                    lasttyped = 0;
+                }
+            }
+        }
 }
