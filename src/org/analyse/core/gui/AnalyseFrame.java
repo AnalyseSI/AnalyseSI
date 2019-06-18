@@ -26,6 +26,8 @@ package org.analyse.core.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -62,7 +64,7 @@ public class AnalyseFrame extends JFrame {
 	
 	public static final String DEFAULT = Constantes.DEFAULT ; 
 	public static final String HELP = Constantes.HELP;
-
+        
 	/* Menu + Toolbar */
 	private AnalyseMenu menu;
 
@@ -86,6 +88,8 @@ public class AnalyseFrame extends JFrame {
 	private AnalysePanel panelCurrent;
 
 	private AnalysePanel helpPanel;
+        
+        private AnalyseFrame analyseframe;
 
 	/* Factory */
 	private NavigationActionFactory navigationActionFactory;
@@ -101,9 +105,15 @@ public class AnalyseFrame extends JFrame {
 						.getImage());
 
 		/* Gestion des évènements */
-		this.addWindowListener(new WindowHandler());
+		this.addWindowListener(new WindowHandler(this));
 		actionListener = new MainActionListener();
 		navigationActionFactory = new NavigationActionFactory(this);
+                
+                /* Permet à la Frame de recevoir les KeyEvent */
+                this.setFocusable(true);
+                this.addKeyListener(new KeyHandler());
+                windowfocus wf = new windowfocus((this));
+                
 
 		/* Constuction des Menus */
 		menu = new AnalyseMenu();
@@ -118,7 +128,7 @@ public class AnalyseFrame extends JFrame {
 		/* Container */
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
-
+                
 		/* Nord */
 		c.add(BorderLayout.NORTH, new JPanel(new BorderLayout()) {
 			{
@@ -283,6 +293,7 @@ public class AnalyseFrame extends JFrame {
 		center.revalidate();
 		center.repaint();
 
+
 		this.panelCurrent = panelCurrent;
 	}
 
@@ -338,7 +349,7 @@ public class AnalyseFrame extends JFrame {
 	public void addNavigateButton(BasicAction action) {
 		this.navigator.addButton(action);
 	}
-
+        
 	/**
 	 * Ferme proprement en sauvegardant les paramètres.
 	 */
@@ -356,6 +367,11 @@ public class AnalyseFrame extends JFrame {
 	}
 
 	private class WindowHandler extends WindowAdapter {
+            private boolean hasbeenactivated = false;
+            private AnalyseFrame af;
+            public WindowHandler(AnalyseFrame af){
+                this.af = af;
+            }
 		public void windowClosing(WindowEvent evt) {
 			boolean sortir = exit();
 			
@@ -363,7 +379,29 @@ public class AnalyseFrame extends JFrame {
 			if ( ! sortir )
 				setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			else 
-				System.exit(0);			
+				System.exit(0);
 		}
 	}
+        
+        /** 
+         * Gère les évènements clavier
+         * ROUX Constant, MICHEL Arthur
+        */
+        
+        private class KeyHandler extends KeyAdapter
+        {
+            int lasttyped;
+            public void keyPressed(KeyEvent ke){
+                if((int)ke.getKeyCode() == 17){
+                    lasttyped = 17;
+                }
+                if((int)ke.getKeyCode() == 83 && lasttyped == 17){
+                    AnalyseSave s = Main.analyseFrame.getAnalyseSave();
+                    s.save();
+                }
+                if((int)ke.getKeyCode() != 17){
+                    lasttyped = 0;
+                }
+            }
+        }
 }
