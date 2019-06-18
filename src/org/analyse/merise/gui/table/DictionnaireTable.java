@@ -214,6 +214,20 @@ public class DictionnaireTable extends AbstractTableModel
             rows.remove(indexRows[i]);
         }
 
+        //modif michel.a
+        //crée une nouvelle ligne en cas de suppression complète du dictionaire
+        //correction du bug #1828428 (La suppression de tout le dictionnaire empêche la création d'attributs)
+        if( rows.isEmpty()){
+            addNewLine();
+        }
+        
+        //modif michel.a
+        //crée une nouvelle ligne vide quand la dernière ligne est supprimée
+        //correction du bug #1828390 (Conflit en cas de suppression de la dernière ligne du dictionnaire)
+        if(indexRows[indexRows.length-1] == rows.size() ){
+            addNewLine();
+        }
+        
         //Actualise le tableau
         fireTableDataChanged();
     }
