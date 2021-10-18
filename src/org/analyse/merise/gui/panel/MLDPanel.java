@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileOutputStream;
@@ -52,6 +54,7 @@ import org.analyse.core.modules.ClipboardInterface;
 import org.analyse.core.util.Constantes;
 import org.analyse.core.util.GUIUtilities;
 import org.analyse.core.util.Utilities;
+import org.analyse.core.util.save.AnalyseSave;
 import org.analyse.core.util.save.FileChooserFilter;
 import org.analyse.main.Main;
 import org.analyse.merise.gui.dialog.ConnectionDialog;
@@ -66,7 +69,7 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 
 	private JPopupMenu popup;
 
-	private JPanel panel, toolbar, statePanel;
+	private JPanel toolbar, statePanel;
 
 	private JEditorPane editor;
 
@@ -121,6 +124,10 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 		this.add(BorderLayout.NORTH, toolbar);
 		this.add(BorderLayout.CENTER, new JScrollPane(editor));
 		this.add(BorderLayout.SOUTH, statePanel);
+                
+                editor.setFocusable(true);
+                editor.addKeyListener(new KeyHandler());
+                
 	}
 
 	private void initToolbar() {
@@ -251,4 +258,21 @@ public class MLDPanel  extends AnalysePanel implements Observer, ClipboardInterf
 				popup.show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
+        
+        private class KeyHandler extends KeyAdapter
+        {
+            int lasttyped;
+            public void keyPressed(KeyEvent ke){
+                if((int)ke.getKeyCode() == 17){
+                    lasttyped = 17;
+                }
+                if((int)ke.getKeyCode() == 83 && lasttyped == 17){
+                    AnalyseSave s = Main.analyseFrame.getAnalyseSave();
+                    s.save();
+                }
+                if((int)ke.getKeyCode() != 17){
+                    lasttyped = 0;
+                }
+            }
+        }
 }
